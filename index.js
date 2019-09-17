@@ -14,7 +14,7 @@
       var un = user.value;
       var ue = email.value;
       var ul = userlocation.value;
-      var uce = (new Date()).toString();
+      var ucd = (new Date()).toString();
       var ur = 1;
       var password=userpassword.value;  
       
@@ -179,7 +179,7 @@
       var vl = venuelocation.value;
       var vcd = (new Date()).toString();
       // var venue_id = "v"+(Math.round((Date.now() + Math.random())*100)); //Create random venue ID
-      var id = "v"+(Math.round((Date.now() + Math.random())*100)); //Create random venue ID
+      var vid = "v"+(Math.round((Date.now() + Math.random())*100)); //Create random venue ID
       var key = firebase.auth().currentUser.uid; 
 
       firebaseRef.child("Venues").child(vid).set({vid,vn, vl, vcd, key});  //Send venue data to database
