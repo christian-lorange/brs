@@ -11,15 +11,15 @@
     // Create User  
     function createuser_submit () { /*Only called if email and zip inputs are found to be valid  */
       var firebaseRef = firebase.database().ref();
-      var user_name = user.value;
-      var user_email = email.value;
-      var user_location = userlocation.value;
-      var user_creationdate = (new Date()).toString();
-      var user_role = 1;
+      var un = user.value;
+      var ue = email.value;
+      var ul = userlocation.value;
+      var uce = (new Date()).toString();
+      var ur = 1;
       var password=userpassword.value;  
       
       //Create User with Email and Password
-      firebase.auth().createUserWithEmailAndPassword(user_email, password).then(function success(user){
+      firebase.auth().createUserWithEmailAndPassword(ue, password).then(function success(user){
 
         //Clear Previous Email Check
         var $result = $("#useremailresult");
@@ -27,7 +27,7 @@
         $result.text("");
 
         var uid = user.user.uid;  //Pull user id which has just been created
-        firebaseRef.child("Users").child(uid).set({uid,user_name, user_email, user_location, user_creationdate, user_role}); //Send user data to database
+        firebaseRef.child("Users").child(uid).set({uid,un, ue, ul, ucd, ur}); //Send user data to database
         }).catch(function(error) {
         // Handle Errors here.
         var errorCode = error.code;
@@ -84,10 +84,10 @@
       var firebaseRef = firebase.database().ref();
       var user = firebase.auth().currentUser;
       var uid = user.uid
-      var userrole = 0;                //Set user to delete   
+      var ur = 0;                //Set user to delete   
       console.log(user)
       
-      firebaseRef.child("Users").child(uid).child("user_role").set(userrole); //Set user role to zero to indicate that user has deleted their account
+      firebaseRef.child("Users").child(uid).child("ur").set(ur); //Set user role to zero to indicate that user has deleted their account
 
       user.delete().then(function() {
         // User deleted.
@@ -175,23 +175,23 @@
     // Venue
     function createvenue_submit () { /*Only called if email, phone, and zip inputs are found to be valid  */
       var firebaseRef = firebase.database().ref();
-      var venue_name = venuename.value;
-      var venue_location = venuelocation.value;
-      var venue_creationdate = (new Date()).toString();
+      var vn = venuename.value;
+      var vl = venuelocation.value;
+      var vcd = (new Date()).toString();
       // var venue_id = "v"+(Math.round((Date.now() + Math.random())*100)); //Create random venue ID
-      var venue_id = "v"+(Math.round((Date.now() + Math.random())*100)); //Create random venue ID
+      var id = "v"+(Math.round((Date.now() + Math.random())*100)); //Create random venue ID
       var key = firebase.auth().currentUser.uid; 
 
-      firebaseRef.child("Venues").child(venue_id).set({venue_id,venue_name, venue_location, venue_creationdate, key});  //Send venue data to database
+      firebaseRef.child("Venues").child(vid).set({vid,vn, vl, vcd, key});  //Send venue data to database
 
 
       var firebaseRef = firebase.database().ref();
       var user = firebase.auth().currentUser;
       var uid = user.uid
-      var userrole = 3;                //Set venue to active   
+      var ur = 3;                //Set venue to active   
       
       
-      firebaseRef.child("Users").child(uid).child("user_role").set(userrole); //Change venue from pending to active
+      firebaseRef.child("Users").child(uid).child("ur").set(ur); //Change venue from pending to active
 
       var x = document.getElementById("drink");
       var y = document.getElementById("venue");
@@ -209,8 +209,8 @@
       if (snapshot.exists()){
       var user = firebase.auth().currentUser;
       var uid = user.uid
-      var userrole = 2;                //Set venue to active  
-      firebaseRef.child("Users").child(uid).child("user_role").set(userrole); //Change user to pending venue
+      var ur = 2;                //Set venue to active  
+      firebaseRef.child("Users").child(uid).child("ur").set(ur); //Change user to pending venue
 
      
       snapshot.forEach((function(child) { indexData=child.key })); 
@@ -247,16 +247,16 @@
     //Create Drinks
     function createdrink_submit () { 
       var firebaseRef = firebase.database().ref();
-      var drink_name = drinkname.value;
-      var drink_style = drinkstyle.value;
-      var drink_abv = drinkabv.value;
-      var drink_ibu = drinkibu.value;
-      var drink_description = drinkdescription.value;
-      var drink_creationdate = (new Date()).toString();
-      var drink_id = "d"+(Math.round((Date.now() + Math.random())*100));    //Create random drink ID
+      var dn = drinkname.value;
+      var ds = drinkstyle.value;
+      var da = drinkabv.value;
+      var di = drinkibu.value;
+      var dd = drinkdescription.value;
+      var dcd = (new Date()).toString();
+      var did = "d"+(Math.round((Date.now() + Math.random())*100));    //Create random drink ID
       var venue = firebase.auth().currentUser.uid;                          //Add venue to drink list
 
-      firebaseRef.child("Drinks").child(drink_id).set({drink_id,drink_name,drink_style,drink_abv,drink_ibu,drink_creationdate, venue, drink_description});  //Send drink data to database
+      firebaseRef.child("Drinks").child(did).set({did,dn,ds,da,di,dcd, venue, dd});  //Send drink data to database
     }
 
     $("#createdrink").on("click", createdrink_submit); /*No validation currently included*/
@@ -380,10 +380,10 @@ $(document).ready(function(){
   document.getElementById('venue_table').appendChild(tr);
 
   var link=document.createElement("a");
-  link.appendChild(document.createTextNode(childSnapshot.child("venue_name").val()));
+  link.appendChild(document.createTextNode(childSnapshot.child("vn").val()));
   link.onclick = "#";
 
-  var venue_name_input= (childSnapshot.child("venue_name").val())
+  var venue_name_input= (childSnapshot.child("vn").val())
 
   link.onclick = function() {loadBeers(childSnapshot.child("key").val(),venue_name_input)};
 
@@ -399,7 +399,7 @@ $(document).ready(function(){
   //Check what level the user is
   setTimeout(function(){
   var user = firebase.auth().currentUser.uid;   //Get current user ID
-  firebase.database().ref("Users").child(user).child("user_role").on('value', function (snapshot) {   //Get user role of current user (1=general user, 2=pending venue, 3=active user, 4=super user)
+  firebase.database().ref("Users").child(user).child("ur").on('value', function (snapshot) {   //Get user role of current user (1=general user, 2=pending venue, 3=active user, 4=super user)
 
   if (snapshot.val()==1){                               //if general user show venue table
     var x = document.getElementById("venue_table");
@@ -483,7 +483,7 @@ $(document).ready(function(){
     var firebaseRef = firebase.database().ref();
     var uid = firebase.auth().currentUser.uid; 
 
-    var current_beer = childSnapshot.child("drink_id").val();
+    var current_beer = childSnapshot.child("did").val();
     var current_venue = childSnapshot.child("venue").val();
 
     //See if that particular beer has been rated by the current user
@@ -534,11 +534,11 @@ $(document).ready(function(){
 
  
     //Define what will be added to columns
-    drinkdetail1.appendChild(document.createTextNode(childSnapshot.child("drink_name").val()));
-    drinkdetail2.appendChild(document.createTextNode(("ABV: " + childSnapshot.child("drink_abv").val())));
-    drinkdetail3.appendChild(document.createTextNode(("IBU: " + childSnapshot.child("drink_ibu").val())));
+    drinkdetail1.appendChild(document.createTextNode(childSnapshot.child("dn").val()));
+    drinkdetail2.appendChild(document.createTextNode(("ABV: " + childSnapshot.child("da").val())));
+    drinkdetail3.appendChild(document.createTextNode(("IBU: " + childSnapshot.child("di").val())));
 
-    drinkdescriptiontext.appendChild(document.createTextNode(childSnapshot.child("drink_description").val()));
+    drinkdescriptiontext.appendChild(document.createTextNode(childSnapshot.child("dd").val()));
         
     td.appendChild(drinkdetail1);     //Add details to column
     td2.appendChild(drinkdetail2);
