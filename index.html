@@ -1,0 +1,323 @@
+ <!Doctype html>
+<html>
+<head>
+  <title>Brew Menu Stash</title>
+
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.teal-red.min.css" />
+  <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
+
+
+
+  <script src="onepagescroll.js"></script>
+
+  <!--Main Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+
+   <link rel="stylesheet" href="onepage-scroll.css" />
+
+
+
+
+
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">
+             <img src="logo.png" alt="Brew Menu Stash Logo">
+          </a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <li><a href="#" onclick="breweries()" data-target=".navbar-collapse">Breweries</a></li>
+            <li><a href="#" onclick="beers()" data-target=".navbar-collapse">Beers</a></li>
+            <li><a href="#" onclick="usersettings()" data-target=".navbar-collapse">User Settings</a></li>
+            <li><a href="#" onclick="signout()" data-target=".navbar-collapse">Sign Out</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+<div class="loading" id="loading" style="display: none"></div>   
+
+<div class="main">
+
+
+
+
+<section >
+  <h2 style="padding-top: 40px;">Find a Brewery</h2>
+
+<input type="text" id="venuetable_input" onkeyup="venuetablesearch()" placeholder="Filter by Brewery Name" >
+<p id="novenues" style="display: none">No locations matching your search could be found. Tell them to sign up for the Brew Menu Stash!</p> <!-- Display if no venues are found by search -->
+<table id="venue_table" style="display: none; padding-bottom: 100vw; border-collapse:collapse;"></table>
+
+<h4 id = "venues_notsignedin" style="display: none;">Sign-in to see this content</h4>
+</section>
+
+<section >
+<h2  style="padding-top: 20px;">Beer List</h2>
+<h2 id="venue_name_display" style="text-align: center;"></h2>
+<table id="drink_table" style=""></table>
+
+<h4 id = "beers_notsignedin" style="display: none;">Sign-in to see this content</h4>
+</section>
+
+<section >
+  <h2>Account Management</h2>
+<div id="notloggedin" style="display: none">
+<!-- Create User -->
+<input id="user" placeholder="User Name"></input>
+<input id="email" placeholder="Email Address"></input>
+<input id="user_location" placeholder="Zip Code"></input>
+<input id="user_password" type="password" placeholder="User Password"></input>
+<button id="createuser">Create User</button>
+<h2 id='useremailresult'></h2>
+<h2 id='userzipresult'></h2>
+
+<br>
+<input id="emailsignin" placeholder="Email Address"></input>
+<input id="passwordsignin" type="password" placeholder="Password"></input>
+<button id="usersignin">Sign In</button>
+<h2 id='loginresult'></h2>
+
+<!--Reset Password -->
+<br>
+<input id="user_email_reset" placeholder="Email Associated with Account"></input>
+<button id="useremailreset">Request Email Reset</button>
+</div>
+
+
+
+
+<!-- Create Venue -->
+<div id="venue" style="display: none">
+<input id="venue_name" placeholder="Venue Name"></input>
+<input id="venue_location" placeholder="Zip Code"></input>
+<input id="venue_phonenumber" placeholder="Phone Number"></input>
+<button id="createvenue">Create Venue</button>
+<h2 id='venueemailresult'></h2>
+<h2 id='venuephoneresult'></h2>
+<h2 id='venuezipresult'></h2>
+</div>
+
+
+<!-- Create Drink -->
+<div id="drink" style="display: none">
+<input id="drink_name" placeholder="Name"></input>
+<input id="drink_style" placeholder="Style"></input>
+<input id="drink_abv" placeholder="ABV"></input>
+<input id="drink_ibu" placeholder="IBU"></input>
+<textarea id="drink_description" placeholder="Description of Beer"></textarea>
+<button id="createdrink">Add Beverage</button>
+</div>
+
+<!--Update Password -->
+<div id="user_management" style="display: none;">
+<br>
+<input id="update_password" placeholder="New Password"></input>
+<button id="updatepassword">Update Password</button>
+
+<!--Delete User Account -->
+<br><br>
+<div class="panel-group" id="accordion1" role="tablist" aria-multiselectable="true">
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="heading1">
+            <h4 class="panel-title">
+                <a class="collapsed" data-toggle="collapse" data-parent="#accordion1" href="#collapse1" aria-expanded="false" aria-controls="collapse1">
+                    Delete User Account
+                </a>
+            </h4>
+        </div>
+        <div id="collapse1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading1">
+            <div class="panel-body">
+                <br>
+                <p>Click the button below to delete your user account. This process cannot be undone.</p>
+                <button id="delete_user_1">Delete User Account</button>
+                <button id="delete_user_2" style="display: none">Are You Really Sure? This Cannot be Undone</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Upgrade Account -->
+<br><br>
+<div class="panel-group" id="accordion2" role="tablist" aria-multiselectable="true">
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="heading1">
+            <h4 class="panel-title">
+                <a class="collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapse2" aria-expanded="false" aria-controls="collapse2">
+                    Upgrade User Account to a Venue Account
+                </a>
+            </h4>
+        </div>
+        <div id="collapse2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading2">
+            <div class="panel-body">
+                <br>
+                <p>Submit your upgrade key. To receive an update key please contact XXXX</p>
+                <input id="upgradeaccount" placeholder="Upgrade Key"></input>
+                <button id="upgrade">Update to a Venue Accout</button>
+                <h3 id='upgraderesult' style="display: none">This is an invalid upgrade key or it has already been used</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+
+<!-- Sign Out -->
+<div id="signout" display="none">
+<button id="usersignout">Sign Out</button>
+</div>
+</section>
+
+</div>
+
+<script type="text/javascript">
+//One Page Scroll
+   onePageScroll(".main", {
+     sectionContainer: "section",
+     loop: true,
+     responsiveFallback: false
+   });
+</script>
+
+
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.9.3/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.9.3/firebase-database.js"></script>
+
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#config-web-app -->
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyBdo9rpgWlLY7O2NtC_dDk9sFgKozzj2z4",
+    authDomain: "databasetest-c5349.firebaseapp.com",
+    databaseURL: "https://databasetest-c5349.firebaseio.com",
+    projectId: "databasetest-c5349",
+    storageBucket: "",
+    messagingSenderId: "728265411166",
+    appId: "1:728265411166:web:68e6e60c761f6d1f"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+
+  //Keep users logged in unless they explicitly logout
+  firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+  .then(function() {
+    // Existing and future Auth states are now persisted in the current
+    // session only. Closing the window would clear any existing state even
+    // if a user forgets to sign out.
+    // ...
+    // New sign-in will be persisted with session persistence.
+    return firebase.auth().signInWithEmailAndPassword(email, password);
+  })
+  .catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+  });
+
+
+  //Check if user is logged in
+
+  firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    // User is signed in.
+      var x = document.getElementById("notloggedin");     /*Hide login page when users log in*/
+      x.style.display = "none";
+
+      var y = document.getElementById("signout");         /*Show sign out when logging in*/
+      y.style.display = "block";
+
+
+  } else {
+    
+    // No user is signed in.
+    var x = document.getElementById("notloggedin");     /*Show login page when users logs out*/
+    x.style.display = "block";
+
+    var y = document.getElementById("signout");         /*Hide sign out when logging out*/
+    y.style.display = "none";
+
+    moveTo(".main", 3);                                 /*Scroll to log in page*/
+
+    var x = document.getElementById("venues_notsignedin");     /*Show error if user is not logged in*/
+    x.style.display = "block";
+
+    var x = document.getElementById("beers_notsignedin");     /*Show error if user is not logged in*/
+    x.style.display = "block";
+  }
+});
+
+</script>
+
+
+<script>
+//Filter venues list
+function venuetablesearch() {
+  // Declare variables 
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("venuetable_input");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("venue_table");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    } 
+  }
+
+  var aTR=document.getElementById('venue_table').getElementsByTagName('tr');
+for(var i=0, count=1; i<aTR.length; i++) {
+    if(aTR[i].style.display!='none') {
+        count++;   
+        }
+    }
+
+var x = document.getElementById("novenues")
+if (count==1){x.style.display = "block";}     //Display message saying nothing was found in the search
+else {x.style.display = "none";}
+
+}
+//End of filtering venues list
+</script>
+
+
+  <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+  <script src="index.js"></script>
+
+  </body>
+</html>
+
+<!-- 
+https://www.youtube.com/playlist?list=PLGCjwl1RrtcRTbJ9WBL9exbUFNqwzz9if -->

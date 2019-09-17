@@ -1,0 +1,182 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+  outline: none;
+}
+
+.page-title-span {
+  margin-left: 10px;
+}
+
+.button-right-icon {
+  margin-left: 10px;
+}
+
+/*Login Section */
+
+.login-cover {
+  background: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 800;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#loginProgress {
+  display: none;
+}
+
+#loginError {
+  display: none;
+}
+
+
+/*Navigation*/
+body {
+  min-height: 2000px;
+  padding-top: 70px;
+}
+.navbar-default {
+  background-color: #0d7028;
+  border: 0px;
+}
+.navbar-default .navbar-nav>li>a {
+    color: #fff;
+}
+.navbar-default .navbar-nav>li>a:hover {
+    color: #fff;
+    background-color: #0392CC;
+}
+.navbar-brand {
+    height: auto;
+    margin: 0;
+    padding: 0;
+
+}
+.navbar-brand>img {
+  padding-top: 0;
+  width: 90px;
+  margin-right: 5px;
+}
+
+
+/*Styling table */
+td.class1 {
+width: 100.0vw !important;
+    text-align: center;
+    height: 45px;
+    vertical-align: middle !important;
+    padding-top: 5px;
+    font-weight: bold;
+    font-size: 2em;
+    display: inline-block;
+    border-style: solid;
+    margin-top: 30px;
+
+}
+
+td.class2 {
+  width: 40vw !important;
+    text-align: center;
+    height: 45px;
+    vertical-align: middle !important;
+    padding-top: 5px;
+    font-weight: bold;
+    font-size: 2em;
+    display: inline-block;
+    border-style: solid;
+    border-top: 0;
+}
+
+td.class3 {
+ width: 40vw !important;
+    text-align: center;
+    height: 45px;
+    vertical-align: middle !important;
+    padding-top: 5px;
+    font-weight: bold;
+    font-size: 2em;
+    display: inline-block;
+    border-style: solid;
+    border-top: 0;
+    border-left: 0;
+}
+
+td.class4 {
+ width: 10vw !important;
+    text-align: center;
+    height: 45px;
+    vertical-align: middle !important;
+    padding-top: 5px;
+    font-weight: bold;
+    font-size: 2em;
+    display: inline-block;
+    border-style: solid;
+    border-top: 0;
+    border-left: 0;
+}
+
+td.class5 {
+ width: 10vw !important;
+    text-align: center;
+    height: 45px;
+    vertical-align: middle !important;
+    padding-top: 5px;
+    font-weight: bold;
+    font-size: 2em;
+    display: inline-block;
+    border-style: solid;
+    border-top: 0;
+    border-left: 0;
+}
+
+td.class6 {
+ width: 100vw !important;
+    text-align: center;
+    height: auto;
+    vertical-align: middle !important;
+    padding-top: 5px;
+    font-weight: bold;
+    font-size: 2em;
+    display: inline-block;
+    border-style: solid;
+    border-top: 0;
+}
+
+/*Loader*/
+/* Absolute Center Spinner */
+.loading {
+  position: fixed;
+  z-index: 999;
+  height: 50vh;
+  width: auto;
+  overflow: show;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: url('https://media.giphy.com/media/3oKIPcNVbTZ3e6OXMA/giphy.gif') no-repeat center center;
+}
+
+/* Transparent Overlay */
+/*.loading:before {
+  content: '';
+  display: block;
+  position: fixed;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+    background: radial-gradient(rgba(20, 20, 20,.8), rgba(0, 0, 0, .8));
+
+  background: -webkit-radial-gradient(rgba(20, 20, 20,.8), rgba(0, 0, 0,.8));
+}
+
+*/
