@@ -46,6 +46,7 @@
           <ul class="nav navbar-nav" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <li><a href="#" onclick="breweries()" data-target=".navbar-collapse">Breweries</a></li>
             <li><a href="#" onclick="beers()" data-target=".navbar-collapse">Beers</a></li>
+            <li><a href="#" onclick="personalfavorites()" data-target=".navbar-collapse">Personal Favorites</a></li>
             <li><a href="#" onclick="usersettings()" data-target=".navbar-collapse">User Settings</a></li>
             <li><a href="#" onclick="signout()" data-target=".navbar-collapse">Sign Out</a></li>
           </ul>
@@ -70,12 +71,19 @@
 <h4 id = "venues_notsignedin" style="display: none;">Sign-in to see this content</h4>
 </section>
 
+<!-- Beer List -->
 <section >
 <h2  style="padding-top: 20px;">Beer List</h2>
 <h2 id="venue_name_display" style="text-align: center;"></h2>
 <table id="drink_table" style=""></table>
 
 <h4 id = "beers_notsignedin" style="display: none;">Sign-in to see this content</h4>
+</section>
+
+<!-- Personal Favorites Section -->
+<section>
+<h3>Personal Favorites</h3>
+<table id="personaltable"></table>  
 </section>
 
 <section >

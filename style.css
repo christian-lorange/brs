@@ -160,8 +160,8 @@ td.class6 {
   top: 0;
   left: 0;
   bottom: 0;
-  right: 0;
-  background: url('https://media.giphy.com/media/3oKIPcNVbTZ3e6OXMA/giphy.gif') no-repeat center center;
+  right: 0;/*
+  background: url('https://media.giphy.com/media/3oKIPcNVbTZ3e6OXMA/giphy.gif') no-repeat center center;*/
 }
 
 /* Transparent Overlay */
@@ -180,3 +180,8 @@ td.class6 {
 }
 
 */
+
+/*One Page Slider */
+ul.onepage-pagination {
+  display: none;
+}

@@ -364,6 +364,7 @@
 
 // Load Data
 $(document).ready(function(){
+
   var venue_name = [];
 
   loading();
@@ -449,7 +450,7 @@ $(document).ready(function(){
 
     var ven = input;                                //Make variable linking to selected venue
     var venuecurrent = venuename;                   //Make variable linking to selected venue name
-    console.log(venuecurrent)
+
 
     document.getElementById("venue_name_display").innerHTML = venuecurrent; //Load Venue Name
 
@@ -598,6 +599,105 @@ $(document).ready(function(){
   //End of beer rating section
 // End of Loading of Beer Associated with Venue
 
+
+// Load personal favoirtes
+
+  function loadpersonal (){        
+
+    document.getElementById("personaltable").innerHTML = ""; //Remove table content when you choose a new brewery
+  
+
+    var uid = firebase.auth().currentUser.uid; 
+    var ref = firebase.database().ref("Users").child(uid).child("rating");    //Make connection to user table
+
+
+    ref.once('value', function(snapshot) {          //Cycle through user table
+    snapshot.forEach(function(childSnapshot) {
+
+      console.log(childSnapshot.val())
+
+    if (childSnapshot.child("rating").val()==1) {    //Only include drinks associated with venue
+
+    //Create Columns and Rows
+    var tr;
+    var td = document.createElement('td');
+    var td2 = document.createElement('td');
+    var td3 = document.createElement('td');
+    var td4 = document.createElement('td');
+    var td5 = document.createElement('td');
+    var td6 = document.createElement('td')
+    tr = document.createElement('tr');
+
+    //Start building tables
+    document.getElementById('personaltable').appendChild(tr);
+
+    var drinkdetail1=document.createElement("h4");
+    var drinkdetail2=document.createElement("p");
+    var drinkdetail3=document.createElement("p");
+    var drinkdescriptiontext=document.createElement("p")
+
+    var firebaseRef = firebase.database().ref();
+    var uid = firebase.auth().currentUser.uid; 
+
+    var current_beer = childSnapshot.child("beer").val();
+
+    
+    //Find data associated with the current popular beer
+    firebaseRef.child("Drinks").child(current_beer).once("value",beersnapshot => {
+   
+    //Define what will be added to columns
+    drinkdetail1.appendChild(document.createTextNode(beersnapshot.child("dn").val()));
+    drinkdetail2.appendChild(document.createTextNode(("ABV: " + beersnapshot.child("da").val())));
+    drinkdetail3.appendChild(document.createTextNode(("IBU: " + beersnapshot.child("di").val())));
+
+    drinkdescriptiontext.appendChild(document.createTextNode(beersnapshot.child("dd").val()));
+
+    })
+
+    firebaseRef.child("Drinks").child(current_beer).once("value",venuesnapshot => {
+      current_venue=venuesnapshot.child("venue").val();
+    })
+
+        var like = document.createElement("a");
+        like.appendChild(document.createTextNode(''));
+        like.onclick = function() {likedrink(current_beer,current_venue);td4.setAttribute("style", "background-color: green;");td5.setAttribute("style", "background-color: none;")};
+        td4.appendChild(like);
+        td4.setAttribute("style", "background-color:green");
+        like.setAttribute("style", "font-size:1em");
+
+        var dislike = document.createElement("a");
+        dislike.onclick = function() {dislikedrink(current_beer,current_venue);td5.setAttribute("style", "background-color: red;");td4.setAttribute("style", "background-color: none;")};
+        dislike.appendChild(document.createTextNode("\u274C"));
+        td5.setAttribute("style", "background-color:red;width:20vw !important");
+        td5.appendChild(dislike);
+
+        
+    td.appendChild(drinkdetail1);     //Add details to column
+    td2.appendChild(drinkdetail2);
+    td3.appendChild(drinkdetail3);
+    td6.appendChild(drinkdescriptiontext);
+    
+   
+    tr.appendChild(td);
+    td.classList.add("class1");       //Add class to column
+    tr.appendChild(td2);
+    td2.classList.add("class2");
+    tr.appendChild(td3);
+    td3.classList.add("class3");
+    // tr.appendChild(td4);
+    // td4.classList.add("class4");
+    tr.appendChild(td5);
+    td5.classList.add("class5");
+    tr.appendChild(td6);
+    td6.classList.add("class6")
+
+
+  }
+})
+})
+}
+  //End of loading personal favorites
+
 // End of Loading Data
 
 
@@ -627,7 +727,8 @@ $(document).ready(function(){
 // Move around page
 function breweries () {moveTo(".main", 1);}
 function beers () {moveTo(".main", 2);}
-function usersettings () {moveTo(".main", 3);}
+function personalfavorites () {moveTo(".main", 3);  loadpersonal();}
+function usersettings () {moveTo(".main", 4);}
 // End of page moving
 
 //Loading
