@@ -148,6 +148,97 @@ td.class6 {
     border-top: 0;
 }
 
+
+/*Styling personal favorites table */
+td.class1fav {
+width: 100.0vw !important;
+    text-align: center;
+    height: 35px;
+    vertical-align: middle !important;
+/*    padding-top: 5px;*/
+    font-weight: bold;
+    font-size: 1em;
+    display: inline-block;
+    border-style: solid;
+    border-bottom: 0;
+
+}
+
+td.class2fav {
+  width: 40vw !important;
+    text-align: center;
+    height: 35px;
+    vertical-align: middle !important;
+/*    padding-top: 5px;*/
+    font-weight: bold;
+    font-size: 1em;
+    display: inline-block;
+    border-style: solid;
+    border-top: 0;
+    border-bottom: 0;
+    border-right: 0;
+}
+
+td.class3fav {
+ width: 40vw !important;
+    text-align: center;
+    height: 35px;
+    vertical-align: middle !important;
+/*    padding-top: 5px;*/
+    font-weight: bold;
+    font-size: 21em;
+    display: inline-block;
+    border-style: solid;
+    border-top: 0;
+    border-left: 0;
+    border-bottom: 0;
+    border-right: 0;
+}
+
+td.class4fav {
+ width: 10vw !important;
+    text-align: center;
+    height: 35px;
+    vertical-align: middle !important;
+/*    padding-top: 5px;*/
+    font-weight: bold;
+    font-size: 1em;
+    display: inline-block;
+    border-style: solid;
+    border-top: 0;
+    border-left: 0;
+    border-bottom: 0;
+}
+
+td.class5fav {
+ width: 10vw !important;
+    text-align: center;
+    height: 35px;
+    vertical-align: middle !important;
+/*    padding-top: 5px;*/
+    font-weight: bold;
+    font-size: 1em;
+    display: inline-block;
+    border-style: solid;
+    border-top: 0;
+    border-left: 0;
+    border-bottom: 0;
+}
+
+td.class6fav {
+ width: 100vw !important;
+    text-align: center;
+    height: auto;
+    vertical-align: middle !important;
+/*    padding-top: 5px;*/
+    font-weight: bold;
+    font-size: 1em;
+    display: inline-block;
+    border-style: solid;
+    border-top: 0;
+}
+
+
 /*Loader*/
 /* Absolute Center Spinner */
 .loading {

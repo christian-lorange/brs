@@ -47,7 +47,9 @@
             <li><a href="#" onclick="breweries()" data-target=".navbar-collapse">Breweries</a></li>
             <li><a href="#" onclick="beers()" data-target=".navbar-collapse">Beers</a></li>
             <li><a href="#" onclick="personalfavorites()" data-target=".navbar-collapse">Personal Favorites</a></li>
-            <li><a href="#" onclick="usersettings()" data-target=".navbar-collapse">User Settings</a></li>
+            <li id="usernav"><a href="#" onclick="usersettings()" data-target=".navbar-collapse">User Settings</a></li>
+            <li id="brewerynav" style="display: none"><a href="#" onclick="usersettings()" data-target=".navbar-collapse">Brewery Management</a></li>
+            <li><a href="#" onclick="contactus()" data-target=".navbar-collapse">Contact Us</a></li>
             <li><a href="#" onclick="signout()" data-target=".navbar-collapse">Sign Out</a></li>
           </ul>
         </div><!--/.nav-collapse -->
@@ -84,6 +86,7 @@
 <section>
 <h3>Personal Favorites</h3>
 <table id="personaltable"></table>  
+<h4 id = "favorites_notsignedin" style="display: none;">Sign-in to see this content</h4>
 </section>
 
 <section >
@@ -118,22 +121,65 @@
 <input id="venue_name" placeholder="Venue Name"></input>
 <input id="venue_location" placeholder="Zip Code"></input>
 <input id="venue_phonenumber" placeholder="Phone Number"></input>
-<button id="createvenue">Create Venue</button>
+<button id="createvenue">Make Venue Live</button>
+<p style="background:green; display: none" id="userpending">Thank you for submitting your activation code. You can now start adding beers. You will need to click the "make venue live" button above for users to see your brewery and beer list.</p>
 <h2 id='venueemailresult'></h2>
 <h2 id='venuephoneresult'></h2>
 <h2 id='venuezipresult'></h2>
 </div>
 
 
-<!-- Create Drink -->
-<div id="drink" style="display: none">
-<input id="drink_name" placeholder="Name"></input>
-<input id="drink_style" placeholder="Style"></input>
-<input id="drink_abv" placeholder="ABV"></input>
-<input id="drink_ibu" placeholder="IBU"></input>
-<textarea id="drink_description" placeholder="Description of Beer"></textarea>
-<button id="createdrink">Add Beverage</button>
+<div class="panel-group" id="accordionbeer" role="tablist" aria-multiselectable="true">
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingbeer1">
+            <h4 class="panel-title">
+                <a class="collapsed" data-toggle="collapse" data-parent="#accordionbeer" href="#collapsebeer1" aria-expanded="false" aria-controls="collapsebeer1">
+                    Add Beer
+                </a>
+            </h4>
+        </div>
+        <div id="collapsebeer1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingbeer1">
+            <div class="panel-body">
+                <!-- Create Drink -->
+				<div id="drink" style="display: none">
+				<input id="drink_name" placeholder="Name"></input>
+				<input id="drink_style" placeholder="Style"></input>
+				<input id="drink_abv" placeholder="ABV"></input>
+				<input id="drink_ibu" placeholder="IBU"></input>
+				<textarea id="drink_description" placeholder="Description of Beer"></textarea>
+				<button id="createdrink">Add Beverage</button>
+				<p style="background:green; display: none" id="beeradded">Beer has been added</p>
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingbeer2">
+            <h4 class="panel-title">
+                <a class="collapsed" data-toggle="collapse" data-parent="#accordionbeer" href="#collapsebeer2" aria-expanded="false" aria-controls="collapsebeer2">
+                    Edit Existing Beer
+                </a>
+            </h4>
+        </div>
+        <div id="collapsebeer2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingbeer2">
+            <div class="panel-body">
+            	<select id="beers_to_edit" onchange="load_beer_to_edit()">
+            		<option>Select a Beer to Edit</option>
+            	</select>
+                <div id="drink_to_edit">
+				<input id="drink_name_edit" placeholder="Name"></input>
+				<input id="drink_style_edit" placeholder="Style"></input>
+				<input id="drink_abv_edit" placeholder="ABV"></input>
+				<input id="drink_ibu_edit" placeholder="IBU"></input>
+				<textarea id="drink_description_edit" placeholder="Description of Beer"></textarea>
+				<button id="updatedrink">Update Beverage</button>
+				</div>
+            </div>
+        </div>
+    </div>
 </div>
+
+
 
 <!--Update Password -->
 <div id="user_management" style="display: none;">
@@ -181,6 +227,7 @@
                 <input id="upgradeaccount" placeholder="Upgrade Key"></input>
                 <button id="upgrade">Update to a Venue Accout</button>
                 <h3 id='upgraderesult' style="display: none">This is an invalid upgrade key or it has already been used</h3>
+
             </div>
         </div>
     </div>
@@ -188,10 +235,18 @@
 
 </div>
 
+
+
 <!-- Sign Out -->
 <div id="signout" display="none">
 <button id="usersignout">Sign Out</button>
 </div>
+</section>
+
+<!-- Contact Us section -->
+<section >
+  <h2>Contact Us</h2>
+  <script type="text/javascript" src="https://form.jotform.com/jsform/92904738286166"></script>
 </section>
 
 </div>
@@ -269,12 +324,18 @@
     var y = document.getElementById("signout");         /*Hide sign out when logging out*/
     y.style.display = "none";
 
-    moveTo(".main", 3);                                 /*Scroll to log in page*/
+    moveTo(".main", 4);                                 /*Scroll to log in page*/
 
     var x = document.getElementById("venues_notsignedin");     /*Show error if user is not logged in*/
     x.style.display = "block";
 
     var x = document.getElementById("beers_notsignedin");     /*Show error if user is not logged in*/
+    x.style.display = "block";
+
+    var x = document.getElementById("accordionbeer");     /*Show error if user is not logged in*/
+    x.style.display = "none";
+
+    var x = document.getElementById("favorites_notsignedin");     /*Show error if user is not logged in*/
     x.style.display = "block";
   }
 });
@@ -326,6 +387,3 @@ else {x.style.display = "none";}
 
   </body>
 </html>
-
-<!-- 
-https://www.youtube.com/playlist?list=PLGCjwl1RrtcRTbJ9WBL9exbUFNqwzz9if -->
