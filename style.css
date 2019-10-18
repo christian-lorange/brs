@@ -40,9 +40,11 @@
 body {
   min-height: 2000px;
   padding-top: 70px;
+  background-color: #fff2c9;
+  text-align: center;
 }
 .navbar-default {
-  background-color: #0d7028;
+  background-color: #000000;
   border: 0px;
 }
 .navbar-default .navbar-nav>li>a {
@@ -64,6 +66,14 @@ body {
   margin-right: 5px;
 }
 
+.navbar-default .navbar-toggle {
+    border-color: #c1c044;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #c1c044 !important;
+}
+
 
 /*Styling table */
 td.class1 {
@@ -72,11 +82,13 @@ width: 100.0vw !important;
     height: 45px;
     vertical-align: middle !important;
     padding-top: 5px;
-    font-weight: bold;
+    font-weight: bolder;
     font-size: 2em;
     display: inline-block;
-    border-style: solid;
-    margin-top: 30px;
+    border-style: none;
+    background-color: #c1c044;
+    border-bottom: 0;
+
 
 }
 
@@ -89,8 +101,11 @@ td.class2 {
     font-weight: bold;
     font-size: 2em;
     display: inline-block;
-    border-style: solid;
+    border-style: none;
     border-top: 0;
+    border-right: 0;
+    border-bottom: 0;
+    background-color: #c1c044;
 }
 
 td.class3 {
@@ -102,9 +117,12 @@ td.class3 {
     font-weight: bold;
     font-size: 2em;
     display: inline-block;
-    border-style: solid;
+    border-style: none;
     border-top: 0;
     border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+    background-color: #c1c044;
 }
 
 td.class4 {
@@ -116,9 +134,12 @@ td.class4 {
     font-weight: bold;
     font-size: 2em;
     display: inline-block;
-    border-style: solid;
+    border-style: none;
     border-top: 0;
     border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+    background-color: #c1c044;
 }
 
 td.class5 {
@@ -130,9 +151,11 @@ td.class5 {
     font-weight: bold;
     font-size: 2em;
     display: inline-block;
-    border-style: solid;
+    border-style: none;
     border-top: 0;
     border-left: 0;
+    border-bottom: 0;
+    background-color: #c1c044;
 }
 
 td.class6 {
@@ -144,8 +167,9 @@ td.class6 {
     font-weight: bold;
     font-size: 2em;
     display: inline-block;
-    border-style: solid;
+    border-style: none;
     border-top: 0;
+    background-color: #c1c044;
 }
 
 
@@ -159,7 +183,7 @@ width: 100.0vw !important;
     font-weight: bold;
     font-size: 1em;
     display: inline-block;
-    border-style: solid;
+    border-style: none;
     border-bottom: 0;
 
 }
@@ -173,7 +197,7 @@ td.class2fav {
     font-weight: bold;
     font-size: 1em;
     display: inline-block;
-    border-style: solid;
+    border-style: none;
     border-top: 0;
     border-bottom: 0;
     border-right: 0;
@@ -188,7 +212,7 @@ td.class3fav {
     font-weight: bold;
     font-size: 21em;
     display: inline-block;
-    border-style: solid;
+    border-style: none;
     border-top: 0;
     border-left: 0;
     border-bottom: 0;
@@ -204,7 +228,7 @@ td.class4fav {
     font-weight: bold;
     font-size: 1em;
     display: inline-block;
-    border-style: solid;
+    border-style: none;
     border-top: 0;
     border-left: 0;
     border-bottom: 0;
@@ -219,7 +243,7 @@ td.class5fav {
     font-weight: bold;
     font-size: 1em;
     display: inline-block;
-    border-style: solid;
+    border-style: none;
     border-top: 0;
     border-left: 0;
     border-bottom: 0;
@@ -234,7 +258,7 @@ td.class6fav {
     font-weight: bold;
     font-size: 1em;
     display: inline-block;
-    border-style: solid;
+    border-style: none;
     border-top: 0;
 }
 
@@ -275,4 +299,113 @@ td.class6fav {
 /*One Page Slider */
 ul.onepage-pagination {
   display: none;
+}
+
+h2 {
+  text-transform: uppercase;
+  font-size: 2.5em;
+  font-weight: bolder;
+  -webkit-text-stroke: 2px black;
+  color:white;
+}
+
+h3 {
+  font-size: 2em;
+  font-weight: bolder;
+}
+
+
+.class1 h4, .class1fav h4 {
+    font-weight: bolder;
+    margin-top: 5px;
+  }
+
+.class2 p, .class3 p, .class4 p, .class5 p, .class6 p, .class1fav p, .class2fav p, .class3fav p, .class4fav p, .class5fav p, .class6fav p {
+  font-weight: bolder;
+}
+
+.class5fav a {
+  font-weight: bolder;
+  color: black;
+}
+
+.class5fav {
+  padding-top: 8px;
+}
+
+input#venuetable_input {
+    font-size: 2em;
+    border-radius: 20px;
+    text-align: center;
+}
+
+table#venue_table {
+    
+    font-size: 2em;
+    text-overflow: ellipsis;
+    padding: 10px;
+    color: black;
+    text-align: center;
+}
+
+table#venue_table a {
+  color:black;
+}
+
+td {
+  width: 100vw;
+  background-color: #c1c044;
+
+}
+
+tr {
+  width: 100vw;
+  border: solid;
+  border-width: 3px;
+  border-color: #fff2c9;
+  border-top-width:10px;
+  border-bottom-width: 10px;
+
+}
+
+.panel-heading {
+  background-color: #c1c044;
+  font-weight: bolder;
+}
+
+.panel-default>.panel-heading {
+  background-color: none !important;
+  border-color: none !important;
+}
+
+.panel {
+  background-color: none !important;
+  border: none !important;
+}
+
+
+button#updatepassword, button#usersignout {
+  background-color: #c1c044;
+  font-size:1.5em;
+  font-weight: bolder;
+}
+
+input#drink_name, input#drink_style, input#drink_abv, input#drink_ibu, textarea#drink_description, button#createdrink, input#drink_name_edit, input#drink_style_edit, input#drink_abv_edit, input#drink_ibu_edit, textarea#drink_description_edit, button#updatedrink, select#beers_to_edit {
+  width: 90vw;
+  font-size: 1.5em;
+
+}
+
+
+input#update_password {
+  width: 90vw;
+  font-size: 1.5em;
+}
+
+li {
+  font-size: 2.5em;
+  font-color: white;
+  font-weight: bolder;
+  padding-top: 7px;
+  padding-bottom: 7px;
 }

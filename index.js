@@ -330,7 +330,7 @@ $( document ).ready( function() {
       var td = document.createElement( 'td' );
       tr = document.createElement( 'tr' );
       document.getElementById( 'venue_table' ).appendChild( tr );
-      var link = document.createElement( "a" );
+      var link = document.createElement( "div" );
       link.appendChild( document.createTextNode( childSnapshot.child( "vn" ).val() ) );
       link.onclick = "#";
       var venue_name_input = ( childSnapshot.child( "vn" ).val() )
@@ -341,6 +341,7 @@ $( document ).ready( function() {
       tr.appendChild( td );
     } );
   } );
+ 
   //Check what level the user is
   setTimeout( function() {
     var user = firebase.auth().currentUser.uid; //Get current user ID
@@ -382,6 +383,7 @@ $( document ).ready( function() {
     } );
   }, 1000 );
 } )
+
 // Load Beers Associated with Venue
 function loadBeers( input, venuename ) { //Click the link to show the beers
   document.getElementById( "drink_table" ).innerHTML = ""; //Remove table content when you choose a new brewery
@@ -588,7 +590,7 @@ function loadpersonal() {
           td5.setAttribute( "style", "background-color: red;" );
           td4.setAttribute( "style", "background-color: none;" )
         };
-        dislike.appendChild( document.createTextNode( "\u274C" ) );
+        dislike.appendChild( document.createTextNode( "REMOVE" ) );
         td5.setAttribute( "style", "background-color:red;width:20vw !important" );
         td5.appendChild( dislike );
         tdbrewery.appendChild( brewerydetail1 );

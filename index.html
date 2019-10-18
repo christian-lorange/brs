@@ -76,7 +76,7 @@
 <!-- Beer List -->
 <section >
 <h2  style="padding-top: 20px;">Beer List</h2>
-<h2 id="venue_name_display" style="text-align: center;"></h2>
+<h3 id="venue_name_display" style="text-align: center;"></h3>
 <table id="drink_table" style=""></table>
 
 <h4 id = "beers_notsignedin" style="display: none;">Sign-in to see this content</h4>
@@ -84,7 +84,7 @@
 
 <!-- Personal Favorites Section -->
 <section>
-<h3>Personal Favorites</h3>
+<h2>Favorites</h2>
 <table id="personaltable"></table>  
 <h4 id = "favorites_notsignedin" style="display: none;">Sign-in to see this content</h4>
 </section>
@@ -133,9 +133,9 @@
     <div class="panel panel-default">
         <div class="panel-heading" role="tab" id="headingbeer1">
             <h4 class="panel-title">
-                <a class="collapsed" data-toggle="collapse" data-parent="#accordionbeer" href="#collapsebeer1" aria-expanded="false" aria-controls="collapsebeer1">
+                <div class="panel-heading collapsed" data-toggle="collapse" data-parent="#accordionbeer" href="#collapsebeer1" aria-expanded="false" aria-controls="collapsebeer1">
                     Add Beer
-                </a>
+                </div>
             </h4>
         </div>
         <div id="collapsebeer1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingbeer1">
@@ -145,8 +145,8 @@
 				<input id="drink_name" placeholder="Name"></input>
 				<input id="drink_style" placeholder="Style"></input>
 				<input id="drink_abv" placeholder="ABV"></input>
-				<input id="drink_ibu" placeholder="IBU"></input>
-				<textarea id="drink_description" placeholder="Description of Beer"></textarea>
+				<input id="drink_ibu" placeholder="IBU"></input><br>
+				<textarea id="drink_description" placeholder="Description of Beer"></textarea><br>
 				<button id="createdrink">Add Beverage</button>
 				<p style="background:green; display: none" id="beeradded">Beer has been added</p>
 				</div>
@@ -156,9 +156,9 @@
     <div class="panel panel-default">
         <div class="panel-heading" role="tab" id="headingbeer2">
             <h4 class="panel-title">
-                <a class="collapsed" data-toggle="collapse" data-parent="#accordionbeer" href="#collapsebeer2" aria-expanded="false" aria-controls="collapsebeer2">
+                <div class="panel-heading collapsed" data-toggle="collapse" data-parent="#accordionbeer" href="#collapsebeer2" aria-expanded="false" aria-controls="collapsebeer2">
                     Edit Existing Beer
-                </a>
+                </div>
             </h4>
         </div>
         <div id="collapsebeer2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingbeer2">
@@ -170,8 +170,8 @@
 				<input id="drink_name_edit" placeholder="Name"></input>
 				<input id="drink_style_edit" placeholder="Style"></input>
 				<input id="drink_abv_edit" placeholder="ABV"></input>
-				<input id="drink_ibu_edit" placeholder="IBU"></input>
-				<textarea id="drink_description_edit" placeholder="Description of Beer"></textarea>
+				<input id="drink_ibu_edit" placeholder="IBU"></input><br>
+				<textarea id="drink_description_edit" placeholder="Description of Beer"></textarea><br>
 				<button id="updatedrink">Update Beverage</button>
 				</div>
             </div>
@@ -193,9 +193,9 @@
     <div class="panel panel-default">
         <div class="panel-heading" role="tab" id="heading1">
             <h4 class="panel-title">
-                <a class="collapsed" data-toggle="collapse" data-parent="#accordion1" href="#collapse1" aria-expanded="false" aria-controls="collapse1">
+                <div class="panel-heading collapsed" data-toggle="collapse" data-parent="#accordion1" href="#collapse1" aria-expanded="false" aria-controls="collapse1">
                     Delete User Account
-                </a>
+                </div>
             </h4>
         </div>
         <div id="collapse1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading1">
