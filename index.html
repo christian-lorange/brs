@@ -14,13 +14,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
 
 
-
+<!-- 
   <script src="onepagescroll.js"></script>
-
+ -->
   <!--Main Stylesheet -->
   <link rel="stylesheet" href="style.css" />
-
-   <link rel="stylesheet" href="onepage-scroll.css" />
+<!-- 
+   <link rel="stylesheet" href="onepage-scroll.css" /> -->
 
 
 
@@ -64,8 +64,8 @@
 
 
 
-<section >
-  <h2 style="padding-top: 40px;">Find a Brewery</h2>
+<section class="major_section" id="findbrewery" style="display: block">
+  <h2 >Find a Brewery</h2>
 
 <input type="text" id="venuetable_input" onkeyup="venuetablesearch()" placeholder="Filter by Brewery Name" >
 <p id="novenues" style="display: none">No locations matching your search could be found. Tell them to sign up for the Brew Menu Stash!</p> <!-- Display if no venues are found by search -->
@@ -75,29 +75,30 @@
 </section>
 
 <!-- Beer List -->
-<section >
-<h2  style="padding-top: 20px;">Beer List</h2>
+<section class="major_section" id="listbeers">
+<h2 >Beer List</h2>
 <h3 id="venue_name_display" style="text-align: center;"></h3>
+<img style="max-width: 50%; max-height: 150px;" id="venueimage"></img>
 <table id="drink_table" style=""></table>
 
 <h4 id = "beers_notsignedin" style="display: none;">Sign-in to see this content</h4>
 </section>
 
 <!-- Personal Favorites Section -->
-<section>
+<section class="major_section" id="favoritessection">
 <h2>Favorites</h2>
 <table id="personaltable"></table>  
 <h4 id = "favorites_notsignedin" style="display: none;">Sign-in to see this content</h4>
 </section>
 
 <!-- Personal Favorites Section -->
-<section>
+<section class="major_section" id="watchlistsec">
 <h2>Watchlist</h2>
 <table id="watchlisttable"></table>  
 <h4 id = "favorites_notsignedin" style="display: none;">Sign-in to see this content</h4>
 </section>
 
-<section >
+<section class="major_section" id="account">
   <h2>Account Management</h2>
 <div id="notloggedin" style="display: none">
 <!-- Create User -->
@@ -129,6 +130,7 @@
 <input id="venue_name" placeholder="Venue Name"></input>
 <input id="venue_location" placeholder="Zip Code"></input>
 <input id="venue_phonenumber" placeholder="Phone Number"></input>
+<input id="venue_logourl" placeholder="URL of logo"></input>
 <button id="createvenue">Make Venue Live</button>
 <p style="background:green; display: none" id="userpending">Thank you for submitting your activation code. You can now start adding beers. You will need to click the "make venue live" button above for users to see your brewery and beer list.</p>
 <h2 id='venueemailresult'></h2>
@@ -252,21 +254,21 @@
 </section>
 
 <!-- Contact Us section -->
-<section >
+<section class="major_section" id="contactsection">
   <h2>Contact Us</h2>
   <script type="text/javascript" src="https://form.jotform.com/jsform/92904738286166"></script>
 </section>
 
 </div>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 //One Page Scroll
    onePageScroll(".main", {
      sectionContainer: "section",
      loop: true,
      responsiveFallback: false
    });
-</script>
+</script> -->
 
 
 
@@ -332,7 +334,12 @@
     var y = document.getElementById("signout");         /*Hide sign out when logging out*/
     y.style.display = "none";
 
-    moveTo(".main", 4);                                 /*Scroll to log in page*/
+    [].forEach.call(document.querySelectorAll('.major_section'), function (el) {
+	el.style.display = 'none';
+	});
+	var x = document.getElementById("account");
+	x.style.display = "block";
+                                 /*Scroll to log in page*/
 
     var x = document.getElementById("venues_notsignedin");     /*Show error if user is not logged in*/
     x.style.display = "block";
@@ -355,6 +362,7 @@
 //Filter venues list
 function venuetablesearch() {
   // Declare variables 
+
   var input, filter, table, tr, td, i, txtValue;
   input = document.getElementById("venuetable_input");
   filter = input.value.toUpperCase();
@@ -363,7 +371,7 @@ function venuetablesearch() {
 
   // Loop through all table rows, and hide those who don't match the search query
   for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[0];
+    td = tr[i].getElementsByTagName("td")[1];
     if (td) {
       txtValue = td.textContent || td.innerText;
       if (txtValue.toUpperCase().indexOf(filter) > -1) {

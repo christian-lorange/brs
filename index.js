@@ -137,11 +137,13 @@ var venuename = document.getElementById( "venue_name" );
 var venueemail = document.getElementById( "venue_email" );
 var venuelocation = document.getElementById( "venue_location" );
 var venuephonenumber = document.getElementById( "venue_phonenumber" );
+var venuelogo = document.getElementById( "venue_logourl" );
 // Venue
 function createvenue_submit() { /*Only called if email, phone, and zip inputs are found to be valid  */
   var firebaseRef = firebase.database().ref();
   var vn = venuename.value;
   var vl = venuelocation.value;
+  var vi = venuelogo.value;
   var vcd = ( new Date() ).toString();
   // var venue_id = "v"+(Math.round((Date.now() + Math.random())*100)); //Create random venue ID
   var vid = "v" + ( Math.round( ( Date.now() + Math.random() ) * 100 ) ); //Create random venue ID
@@ -154,6 +156,7 @@ function createvenue_submit() { /*Only called if email, phone, and zip inputs ar
     vn,
     vl,
     vcd,
+    vi,
     key
 
   } ); //Send venue data to database
@@ -329,15 +332,28 @@ $( document ).ready( function() {
       var tr;
       var td = document.createElement( 'td' );
       tr = document.createElement( 'tr' );
+      td_logo = document.createElement ('td')
       document.getElementById( 'venue_table' ).appendChild( tr );
+      
+      var image = document.createElement("img")
+      image.src = childSnapshot.child( "vi" ).val(); 
+      td_logo.appendChild( image );
+      td_logo.classList.add( "imageclass" );
+
+      image.onclick = "#";
+      image.onclick = function() {
+        loadBeers( childSnapshot.child( "vn" ).val(), venue_name_input,  childSnapshot.child( "vi" ).val());
+      };
+
       var link = document.createElement( "div" );
       link.appendChild( document.createTextNode( childSnapshot.child( "vn" ).val() ) );
       link.onclick = "#";
       var venue_name_input = ( childSnapshot.child( "vn" ).val() );
       link.onclick = function() {
-        loadBeers( childSnapshot.child( "vn" ).val(), venue_name_input );
+        loadBeers( childSnapshot.child( "vn" ).val(), venue_name_input, childSnapshot.child( "vi" ).val() );
       };
       td.appendChild( link );
+      tr.appendChild( td_logo );
       tr.appendChild( td );
     } );
   } );
@@ -385,12 +401,15 @@ $( document ).ready( function() {
 } );
 
 // Load Beers Associated with Venue
-function loadBeers( input, venuename ) { //Click the link to show the beers
+function loadBeers( input, venuename, url ) { //Click the link to show the beers
   document.getElementById( "drink_table" ).innerHTML = ""; //Remove table content when you choose a new brewery
   document.getElementById( "venue_name_display" ).innerHTML = ""; //Remove venue name when you choose a new brewery
   var ven = input; //Make variable linking to selected venue
   var venuecurrent = venuename; //Make variable linking to selected venue name
   document.getElementById( "venue_name_display" ).innerHTML = venuecurrent; //Load Venue Name
+
+  document.getElementById( "venueimage").src=url;
+
   var ref = firebase.database().ref( "Drinks" ); //Make connection to drinks table
   ref.once( 'value', function( snapshot ) { //Cycle through drinks
     snapshot.forEach( function( childSnapshot ) {
@@ -494,18 +513,7 @@ function loadBeers( input, venuename ) { //Click the link to show the beers
         td3.appendChild( drinkdetail3 );
         td6.appendChild( drinkdescriptiontext );
         tr.appendChild( td );
-        td.classList.add( "class1" ); //Add class to column
-        tr.appendChild(tdwatchlist);
-        tdwatchlist.classList.add("tdwatchlist");
-
-        firebaseRef.child( "Users" ).child( uid ).child( "watch" ).child( current_beer ).once( "value", snapshot => {
-          if (snapshot.hasChild("beer")){
-            watchlist.style.backgroundColor = "green"
-            watchlist.innerHTML="In Watch List"
-            watchlist.onclick = null;
-          }
-        })
-        
+        td.classList.add( "class1" ); //Add class to column      
         tr.appendChild( td2 );
         td2.classList.add( "class2" );
         tr.appendChild( td3 );
@@ -516,10 +524,28 @@ function loadBeers( input, venuename ) { //Click the link to show the beers
         td5.classList.add( "class5" );
         tr.appendChild( td6 );
         td6.classList.add( "class6" );
+        tr.appendChild(tdwatchlist);
+        tdwatchlist.classList.add("tdwatchlist");
+
+        firebaseRef.child( "Users" ).child( uid ).child( "watch" ).child( current_beer ).once( "value", snapshot => {
+          if (snapshot.hasChild("beer")){
+            watchlist.style.backgroundColor = "green"
+            watchlist.innerHTML="In Watch List"
+            watchlist.onclick = null;
+          }
+        })
 
         var x = document.getElementById( "venue_table" ); //hide venue table when show drinks
         x.style.display = "block";
-        moveTo( ".main", 2 );
+        
+          [].forEach.call(document.querySelectorAll('.major_section'), function (el) {
+          el.style.display = 'none';
+          });
+          
+          var x = document.getElementById("listbeers");
+          x.style.display = "block";
+
+
       }
     } );
   } );
@@ -638,7 +664,8 @@ function loadpersonal() {
         dislike.onclick = function() {
           dislikedrink( current_beer, current_venue );
           td5.setAttribute( "style", "background-color: red;" );
-          td4.setAttribute( "style", "background-color: none;" )
+          td4.setAttribute( "style", "background-color: none;" );
+          this.parentElement.parentElement.style.display='none';
         };
         dislike.appendChild( document.createTextNode( "REMOVE" ) );
         td5.setAttribute( "style", "background-color:red;width:20vw !important" );
@@ -721,7 +748,7 @@ function loadwatchlist() {
         like.setAttribute( "style", "font-size:1em" );
         var dislike = document.createElement( "a" );
         dislike.onclick = function() {
-          removefromwatch( current_beer, current_venue ); this.parentElement.parentElement.style.display='none';;
+          removefromwatch( current_beer, current_venue ); this.parentElement.parentElement.style.display='none';
           td5.setAttribute( "style", "background-color: red;" );
           td4.setAttribute( "style", "background-color: none;" )
         };
@@ -842,29 +869,60 @@ $( "#updatedrink" ).on( "click", updatedrink_submit ); /*No validation currently
 // }
 // Move around page
 function breweries() {
-  moveTo( ".main", 1 );
+  // moveTo( ".main", 1 );
+  [].forEach.call(document.querySelectorAll('.major_section'), function (el) {
+  el.style.display = 'none';
+  });
+  var x = document.getElementById("findbrewery");
+  x.style.display = "block";
+
 }
 
 function beers() {
-  moveTo( ".main", 2 );
+  // moveTo( ".main", 2 );
+   [].forEach.call(document.querySelectorAll('.major_section'), function (el) {
+  el.style.display = 'none';
+  });
+  var x = document.getElementById("listbeers");
+  x.style.display = "block";
 }
 
 function personalfavorites() {
-  moveTo( ".main", 3 );
+  // moveTo( ".main", 3 );
+   [].forEach.call(document.querySelectorAll('.major_section'), function (el) {
+  el.style.display = 'none';
+  });
+  var x = document.getElementById("favoritessection");
+  x.style.display = "block";
   loadpersonal();
 }
 
 function watchlistsection() {
-  moveTo( ".main", 4 );
+  // moveTo( ".main", 4 );
+   [].forEach.call(document.querySelectorAll('.major_section'), function (el) {
+  el.style.display = 'none';
+  });
+  var x = document.getElementById("watchlistsec");
+  x.style.display = "block";
   loadwatchlist();
 }
 
 function usersettings() {
-  moveTo( ".main", 5 );
+  // moveTo( ".main", 5 );
+  [].forEach.call(document.querySelectorAll('.major_section'), function (el) {
+  el.style.display = 'none';
+  });
+  var x = document.getElementById("account");
+  x.style.display = "block";
 }
 
 function contactus() {
-  moveTo( ".main", 6 );
+  // moveTo( ".main", 6 );
+   [].forEach.call(document.querySelectorAll('.major_section'), function (el) {
+  el.style.display = 'none';
+  });
+  var x = document.getElementById("contactsection");
+  x.style.display = "block";
 }
 // End of page moving
 
