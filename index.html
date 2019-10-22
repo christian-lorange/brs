@@ -47,6 +47,7 @@
             <li><a href="#" onclick="breweries()" data-target=".navbar-collapse">Breweries</a></li>
             <li><a href="#" onclick="beers()" data-target=".navbar-collapse">Beers</a></li>
             <li><a href="#" onclick="personalfavorites()" data-target=".navbar-collapse">Personal Favorites</a></li>
+            <li><a href="#" onclick="watchlistsection()" data-target=".navbar-collapse">Personal Watchlist</a></li>
             <li id="usernav"><a href="#" onclick="usersettings()" data-target=".navbar-collapse">User Settings</a></li>
             <li id="brewerynav" style="display: none"><a href="#" onclick="usersettings()" data-target=".navbar-collapse">Brewery Management</a></li>
             <li><a href="#" onclick="contactus()" data-target=".navbar-collapse">Contact Us</a></li>
@@ -86,6 +87,13 @@
 <section>
 <h2>Favorites</h2>
 <table id="personaltable"></table>  
+<h4 id = "favorites_notsignedin" style="display: none;">Sign-in to see this content</h4>
+</section>
+
+<!-- Personal Favorites Section -->
+<section>
+<h2>Watchlist</h2>
+<table id="watchlisttable"></table>  
 <h4 id = "favorites_notsignedin" style="display: none;">Sign-in to see this content</h4>
 </section>
 

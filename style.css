@@ -77,8 +77,8 @@ body {
 
 /*Styling table */
 td.class1 {
-width: 100.0vw !important;
-    text-align: center;
+width: 65.0vw !important;
+    text-align: left;
     height: 45px;
     vertical-align: middle !important;
     padding-top: 5px;
@@ -88,8 +88,21 @@ width: 100.0vw !important;
     border-style: none;
     background-color: #c1c044;
     border-bottom: 0;
+    padding-left: 10vw;
 
+}
 
+td.tdwatchlist {
+width: 35.0vw !important;
+    text-align: center;
+    height: 45px;
+    vertical-align: middle !important;
+    font-weight: bolder;
+    font-size: 2em;
+    display: inline-block;
+    border-style: none;
+    background-color: #c1c044;
+    border-bottom: 0;
 }
 
 td.class2 {
@@ -324,6 +337,14 @@ h3 {
   font-weight: bolder;
 }
 
+.tdwatchlist a {
+  font-size: 0.5em;
+  border-style: solid;
+  border-radius: 20px;
+  padding: 7px;
+  color: white;
+}
+
 .class5fav a {
   font-weight: bolder;
   color: black;
@@ -384,17 +405,23 @@ tr {
 }
 
 
-button#updatepassword, button#usersignout {
-  background-color: #c1c044;
-  font-size:1.5em;
-  font-weight: bolder;
-}
 
-input#drink_name, input#drink_style, input#drink_abv, input#drink_ibu, textarea#drink_description, button#createdrink, input#drink_name_edit, input#drink_style_edit, input#drink_abv_edit, input#drink_ibu_edit, textarea#drink_description_edit, button#updatedrink, select#beers_to_edit {
+
+input#user, input#email, input#user_location, input#user_password, input#emailsignin, input#passwordsignin, input#user_email_reset, input#drink_name, input#drink_style, input#drink_abv, input#drink_ibu, textarea#drink_description, input#drink_name_edit, input#drink_style_edit, input#drink_abv_edit, input#drink_ibu_edit, textarea#drink_description_edit, select#beers_to_edit {
   width: 90vw;
   font-size: 1.5em;
-
 }
+
+button#updatepassword, button#usersignout, button#createuser, button#usersignin, button#useremailreset, button#createdrink, button#updatedrink {
+  width: 90vw;
+  font-size: 1.5em;
+  background-color: #c1c044;
+  border-radius: 15px;
+  font-weight: bolder;
+  margin-top:7px;
+}
+
+
 
 
 input#update_password {

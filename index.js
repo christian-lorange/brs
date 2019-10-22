@@ -1,10 +1,10 @@
 //Setting up input forms
 //Users
 // User Variables
-var user = document.getElementById( "user" )
-var email = document.getElementById( "email" )
-var userlocation = document.getElementById( "user_location" )
-var userpassword = document.getElementById( "user_password" )
+var user = document.getElementById( "user" );
+var email = document.getElementById( "email" );
+var userlocation = document.getElementById( "user_location" );
+var userpassword = document.getElementById( "user_password" );
 // Create User  
 function createuser_submit() { /*Only called if email and zip inputs are found to be valid  */
   var firebaseRef = firebase.database().ref();
@@ -38,11 +38,11 @@ function createuser_submit() { /*Only called if email and zip inputs are found t
     var $result = $( "#useremailresult" );
     var email = $( "#email" ).val();
     $result.text( "Either this email address is already exists in our system or your password is not long enough" ); //Send error if that particular email address already exists
-  } )
+  } );
 }
 // Update User Password
 function updatepassword() {
-  var userpassword = document.getElementById( "update_password" )
+  var userpassword = document.getElementById( "update_password" );
   var user = firebase.auth().currentUser;
   var newPassword = userpassword.value;
   user.updatePassword( newPassword ).then( function() {
@@ -54,7 +54,7 @@ function updatepassword() {
 $( "#updatepassword" ).on( "click", updatepassword ); /*No validation currently included*/
 // Send Receipt Password Email
 function email_reset() {
-  var useremail = document.getElementById( "user_email_reset" )
+  var useremail = document.getElementById( "user_email_reset" );
   var auth = firebase.auth();
   auth.sendPasswordResetEmail( useremail.value ).then( function() {
     // Email sent.
@@ -75,7 +75,7 @@ function delete_user_step1() {
 function delete_user_step2() {
   var firebaseRef = firebase.database().ref();
   var user = firebase.auth().currentUser;
-  var uid = user.uid
+  var uid = user.uid;
   var ur = 0; //Set user to delete   
   firebaseRef.child( "Users" ).child( uid ).child( "ur" ).set( ur ); //Set user role to zero to indicate that user has deleted their account
   user.delete().then( function() {
@@ -133,10 +133,10 @@ $( "#usersignout" ).on( "click", signout ); /*Sign user out*/
 //End of Users
 //Venues
 // Venue Variables
-var venuename = document.getElementById( "venue_name" )
-var venueemail = document.getElementById( "venue_email" )
-var venuelocation = document.getElementById( "venue_location" )
-var venuephonenumber = document.getElementById( "venue_phonenumber" )
+var venuename = document.getElementById( "venue_name" );
+var venueemail = document.getElementById( "venue_email" );
+var venuelocation = document.getElementById( "venue_location" );
+var venuephonenumber = document.getElementById( "venue_phonenumber" );
 // Venue
 function createvenue_submit() { /*Only called if email, phone, and zip inputs are found to be valid  */
   var firebaseRef = firebase.database().ref();
@@ -159,7 +159,7 @@ function createvenue_submit() { /*Only called if email, phone, and zip inputs ar
   } ); //Send venue data to database
   var firebaseRef = firebase.database().ref();
   var user = firebase.auth().currentUser;
-  var uid = user.uid
+  var uid = user.uid;
   var ur = 3; //Set venue to active   
   firebaseRef.child( "Users" ).child( uid ).child( "ur" ).set( ur ); //Change venue from pending to active
   var x = document.getElementById( "drink" );
@@ -170,7 +170,7 @@ function createvenue_submit() { /*Only called if email, phone, and zip inputs ar
 
 }
 //Upgrade general user to venue account
-var upgrade_key = document.getElementById( "upgradeaccount" )
+var upgrade_key = document.getElementById( "upgradeaccount" );
 
 function upgrade() {
   var upgradekey = upgrade_key.value;
@@ -178,11 +178,11 @@ function upgrade() {
   firebaseRef.child( "UpgradeTokens" ).orderByChild( "id" ).equalTo( upgradekey ).limitToFirst( 1 ).once( "value", snapshot => {
     if ( snapshot.exists() ) {
       var user = firebase.auth().currentUser;
-      var uid = user.uid
+      var uid = user.uid;
       var ur = 2; //Set venue to active  
       firebaseRef.child( "Users" ).child( uid ).child( "ur" ).set( ur ); //Change user to pending venue
       snapshot.forEach( ( function( child ) {
-        indexData = child.key
+        indexData = child.key;
       } ) );
       status = "0";
       claim_date = ( new Date() ).toString();
@@ -204,11 +204,11 @@ $( "#upgrade" ).on( "click", upgrade ); /*Sign user out*/
 //End of Venues
 //Drinks
 //Drink Variables
-var drinkname = document.getElementById( "drink_name" )
-var drinkstyle = document.getElementById( "drink_style" )
-var drinkabv = document.getElementById( "drink_abv" )
-var drinkibu = document.getElementById( "drink_ibu" )
-var drinkdescription = document.getElementById( "drink_description" )
+var drinkname = document.getElementById( "drink_name" );
+var drinkstyle = document.getElementById( "drink_style" );
+var drinkabv = document.getElementById( "drink_abv" );
+var drinkibu = document.getElementById( "drink_ibu" );
+var drinkdescription = document.getElementById( "drink_description" );
 //Create Drinks
 function createdrink_submit() {
   var firebaseRef = firebase.database().ref();
@@ -225,7 +225,7 @@ function createdrink_submit() {
     firebaseRef.child( "Drinks" ).child( did ).update( {
       venue
     } ); //Send drink data to database
-  } )
+  } );
   firebaseRef.child( "Drinks" ).child( did ).update( {
     did,
     dn,
@@ -262,7 +262,7 @@ function validatephone( phone ) {
 //
 //Validate Zipcode
 function validatezip( zip ) {
-  var zipno = /^\d{5}$|^\d{5}-\d{4}$/;;
+  var zipno = /^\d{5}$|^\d{5}-\d{4}$/;
   return zipno.test( zip );
 }
 //
@@ -275,7 +275,7 @@ function validate_user() {
   var zip = $( "#user_location" ).val();
   $zipresult.text( "" );
   if ( validateEmail( email ) && validatezip( zip ) ) {
-    createuser_submit() /*If both are valid then submit*/
+    createuser_submit(); /*If both are valid then submit*/
   } else {
     if ( validateEmail( email ) ) {} /*If email is valid move on*/
     else { /*If email isn't valid throw error*/
@@ -333,9 +333,9 @@ $( document ).ready( function() {
       var link = document.createElement( "div" );
       link.appendChild( document.createTextNode( childSnapshot.child( "vn" ).val() ) );
       link.onclick = "#";
-      var venue_name_input = ( childSnapshot.child( "vn" ).val() )
+      var venue_name_input = ( childSnapshot.child( "vn" ).val() );
       link.onclick = function() {
-        loadBeers( childSnapshot.child( "vn" ).val(), venue_name_input )
+        loadBeers( childSnapshot.child( "vn" ).val(), venue_name_input );
       };
       td.appendChild( link );
       tr.appendChild( td );
@@ -378,11 +378,11 @@ $( document ).ready( function() {
         var x = document.getElementById( "brewerynav" );
         x.style.display = "block";
         // Load venues beers
-        editbeers_prepare( user )
+        editbeers_prepare( user );
       }
     } );
   }, 1000 );
-} )
+} );
 
 // Load Beers Associated with Venue
 function loadBeers( input, venuename ) { //Click the link to show the beers
@@ -402,14 +402,16 @@ function loadBeers( input, venuename ) { //Click the link to show the beers
         var td3 = document.createElement( 'td' );
         var td4 = document.createElement( 'td' );
         var td5 = document.createElement( 'td' );
-        var td6 = document.createElement( 'td' )
+        var td6 = document.createElement( 'td' );
+        var tdwatchlist = document.createElement('td');   //add to watch list
         tr = document.createElement( 'tr' );
         //Start building tables
         document.getElementById( 'drink_table' ).appendChild( tr );
         var drinkdetail1 = document.createElement( "h4" );
         var drinkdetail2 = document.createElement( "p" );
         var drinkdetail3 = document.createElement( "p" );
-        var drinkdescriptiontext = document.createElement( "p" )
+        var drinkdescriptiontext = document.createElement( "p" );
+        var watchlist = document.createElement("a");
         var firebaseRef = firebase.database().ref();
         var uid = firebase.auth().currentUser.uid;
         var current_beer = childSnapshot.child( "did" ).val();
@@ -422,7 +424,7 @@ function loadBeers( input, venuename ) { //Click the link to show the beers
             like.onclick = function() {
               likedrink( current_beer, current_venue );
               td4.setAttribute( "style", "background-color: green;" );
-              td5.setAttribute( "style", "background-color: none;" )
+              td5.setAttribute( "style", "background-color: none;" );
             };
             td4.appendChild( like );
             td4.setAttribute( "style", "background-color:green" );
@@ -431,7 +433,7 @@ function loadBeers( input, venuename ) { //Click the link to show the beers
             dislike.onclick = function() {
               dislikedrink( current_beer, current_venue );
               td5.setAttribute( "style", "background-color: red;" );
-              td4.setAttribute( "style", "background-color: none;" )
+              td4.setAttribute( "style", "background-color: none;" );
             };
             dislike.appendChild( document.createTextNode( "\uD83D\uDC4E" ) );
             td5.appendChild( dislike );
@@ -441,7 +443,7 @@ function loadBeers( input, venuename ) { //Click the link to show the beers
             dislike.onclick = function() {
               dislikedrink( current_beer, current_venue );
               td5.setAttribute( "style", "background-color: red;" );
-              td4.setAttribute( "style", "background-color: none;" )
+              td4.setAttribute( "style", "background-color: none;" );
             };
             td5.appendChild( dislike );
             td5.setAttribute( "style", "background-color:red" );
@@ -450,7 +452,7 @@ function loadBeers( input, venuename ) { //Click the link to show the beers
             like.onclick = function() {
               likedrink( current_beer, current_venue );
               td4.setAttribute( "style", "background-color: green;" );
-              td5.setAttribute( "style", "background-color: none;" )
+              td5.setAttribute( "style", "background-color: none;" );
             };
             like.appendChild( document.createTextNode( '\uD83D\uDC4D' ) );
             td4.appendChild( like );
@@ -459,7 +461,7 @@ function loadBeers( input, venuename ) { //Click the link to show the beers
             like.onclick = function() {
               likedrink( current_beer, current_venue );
               td4.setAttribute( "style", "background-color: green;" );
-              td5.setAttribute( "style", "background-color: none;" )
+              td5.setAttribute( "style", "background-color: none;" );
             };
             like.appendChild( document.createTextNode( '\uD83D\uDC4D' ) );
             td4.appendChild( like );
@@ -467,23 +469,43 @@ function loadBeers( input, venuename ) { //Click the link to show the beers
             dislike.onclick = function() {
               dislikedrink( current_beer, current_venue );
               td5.setAttribute( "style", "background-color: red;" );
-              td4.setAttribute( "style", "background-color: none;" )
+              td4.setAttribute( "style", "background-color: none;" );
             };
             dislike.appendChild( document.createTextNode( "\uD83D\uDC4E" ) );
             td5.appendChild( dislike );
           }
-        } )
+        } );
         //Define what will be added to columns
         drinkdetail1.appendChild( document.createTextNode( childSnapshot.child( "dn" ).val() ) );
         drinkdetail2.appendChild( document.createTextNode( ( "ABV: " + childSnapshot.child( "da" ).val() ) ) );
         drinkdetail3.appendChild( document.createTextNode( ( "IBU: " + childSnapshot.child( "di" ).val() ) ) );
         drinkdescriptiontext.appendChild( document.createTextNode( childSnapshot.child( "dd" ).val() ) );
+        watchlist.appendChild( document.createTextNode("Add to Watch List"));
+          watchlist.onclick = function() {              //add specific beer to watch list
+          addtowatchlist( current_beer, current_venue );
+          this.style.backgroundColor='green';
+          this.innerHTML="In Watch List"
+          };
+
+          tdwatchlist.appendChild(watchlist);
+
         td.appendChild( drinkdetail1 ); //Add details to column
         td2.appendChild( drinkdetail2 );
         td3.appendChild( drinkdetail3 );
         td6.appendChild( drinkdescriptiontext );
         tr.appendChild( td );
         td.classList.add( "class1" ); //Add class to column
+        tr.appendChild(tdwatchlist);
+        tdwatchlist.classList.add("tdwatchlist");
+
+        firebaseRef.child( "Users" ).child( uid ).child( "watch" ).child( current_beer ).once( "value", snapshot => {
+          if (snapshot.hasChild("beer")){
+            watchlist.style.backgroundColor = "green"
+            watchlist.innerHTML="In Watch List"
+            watchlist.onclick = null;
+          }
+        })
+        
         tr.appendChild( td2 );
         td2.classList.add( "class2" );
         tr.appendChild( td3 );
@@ -493,7 +515,8 @@ function loadBeers( input, venuename ) { //Click the link to show the beers
         tr.appendChild( td5 );
         td5.classList.add( "class5" );
         tr.appendChild( td6 );
-        td6.classList.add( "class6" )
+        td6.classList.add( "class6" );
+
         var x = document.getElementById( "venue_table" ); //hide venue table when show drinks
         x.style.display = "block";
         moveTo( ".main", 2 );
@@ -508,7 +531,7 @@ function likedrink( beerinput, venueinput ) {
   var uid = firebase.auth().currentUser.uid;
   var beer = beerinput;
   var venue = venueinput;
-  var rating = "1"
+  var rating = "1";
   var rate_date = ( new Date() ).toString();
   firebaseRef.child( "Users" ).child( uid ).child( "rating" ).child( beer ).set( {
     rate_date,
@@ -517,7 +540,7 @@ function likedrink( beerinput, venueinput ) {
     venue
   } ); //Send rating
 }
-
+//Add disliked links to users profiles
 function dislikedrink( beerinput, venueinput ) {
   var firebaseRef = firebase.database().ref();
   var uid = firebase.auth().currentUser.uid;
@@ -532,6 +555,33 @@ function dislikedrink( beerinput, venueinput ) {
     venue
   } ); //Send rating
 }
+
+//Add watchlist to users profiles
+function addtowatchlist( beerinput, venueinput ) {
+  var firebaseRef = firebase.database().ref();
+  var uid = firebase.auth().currentUser.uid;
+  var beer = beerinput;
+  var venue = venueinput;
+  var rating = "-1"
+  var rate_date = ( new Date() ).toString();
+  firebaseRef.child( "Users" ).child( uid ).child( "watch" ).child( beer ).set( {
+    rate_date,
+    beer,
+    venue
+  } ); //Send to watch list
+}
+
+//Add watchlist to users profiles
+function removefromwatch( beerinput, venueinput ) {
+  var firebaseRef = firebase.database().ref();
+  var uid = firebase.auth().currentUser.uid;
+  var beer = beerinput;
+  var venue = venueinput;
+  var rating = "-1"
+  var rate_date = ( new Date() ).toString();
+  firebaseRef.child( "Users" ).child( uid ).child( "watch" ).child( beer ).remove(); //Remove from watch list
+}
+
 //End of beer rating section
 // End of Loading of Beer Associated with Venue
 // Load personal favoirtes
@@ -617,6 +667,91 @@ function loadpersonal() {
 }
 
 //End of loading personal favorites
+
+
+// Load personal watchlist
+function loadwatchlist() {
+  document.getElementById( "watchlisttable" ).innerHTML = ""; //Remove table content when you choose a new brewery
+  var uid = firebase.auth().currentUser.uid;
+  var ref = firebase.database().ref( "Users" ).child( uid ).child( "watch" ).orderByChild( "venue" ); //Make connection to user table
+  ref.once( 'value', function( snapshot ) { //Cycle through user table
+    snapshot.forEach( function( childSnapshot ) {
+      
+        //Create Columns and Rows
+        var tr;
+        var tdbrewery = document.createElement( 'td' );
+        var td = document.createElement( 'td' );
+        var td2 = document.createElement( 'td' );
+        var td3 = document.createElement( 'td' );
+        var td4 = document.createElement( 'td' );
+        var td5 = document.createElement( 'td' );
+        var td6 = document.createElement( 'td' )
+        tr = document.createElement( 'tr' );
+        //Start building tables
+        document.getElementById( 'watchlisttable' ).appendChild( tr );
+        var brewerydetail1 = document.createElement( "h4" );
+        var drinkdetail1 = document.createElement( "h4" );
+        var drinkdetail2 = document.createElement( "p" );
+        var drinkdetail3 = document.createElement( "p" );
+        var drinkdescriptiontext = document.createElement( "p" )
+        var firebaseRef = firebase.database().ref();
+        var uid = firebase.auth().currentUser.uid;
+        var current_beer = childSnapshot.child( "beer" ).val();
+        //Find data associated with the current popular beer
+        firebaseRef.child( "Drinks" ).child( current_beer ).once( "value", beersnapshot => {
+          //Define what will be added to columns
+          drinkdetail1.appendChild( document.createTextNode( beersnapshot.child( "dn" ).val() ) );
+          drinkdetail2.appendChild( document.createTextNode( ( "ABV: " + beersnapshot.child( "da" ).val() ) ) );
+          drinkdetail3.appendChild( document.createTextNode( ( "IBU: " + beersnapshot.child( "di" ).val() ) ) );
+          drinkdescriptiontext.appendChild( document.createTextNode( beersnapshot.child( "dd" ).val() ) );
+        } )
+        firebaseRef.child( "Drinks" ).child( current_beer ).once( "value", venuesnapshot => {
+          current_venue = venuesnapshot.child( "venue" ).val();
+          drinkdetail1.appendChild( document.createTextNode( current_venue + " - " ) );
+        } )
+        var like = document.createElement( "a" );
+        like.appendChild( document.createTextNode( '' ) );
+        like.onclick = function() {
+          likedrink( current_beer, current_venue );
+          td4.setAttribute( "style", "background-color: green;" );
+          td5.setAttribute( "style", "background-color: none;" )
+        };
+        td4.appendChild( like );
+        td4.setAttribute( "style", "background-color:green" );
+        like.setAttribute( "style", "font-size:1em" );
+        var dislike = document.createElement( "a" );
+        dislike.onclick = function() {
+          removefromwatch( current_beer, current_venue ); this.parentElement.parentElement.style.display='none';;
+          td5.setAttribute( "style", "background-color: red;" );
+          td4.setAttribute( "style", "background-color: none;" )
+        };
+        dislike.appendChild( document.createTextNode( "REMOVE" ) );
+        td5.setAttribute( "style", "background-color:red;width:20vw !important" );
+        td5.appendChild( dislike );
+        tdbrewery.appendChild( brewerydetail1 );
+        td.appendChild( drinkdetail1 ); //Add details to column
+        td2.appendChild( drinkdetail2 );
+        td3.appendChild( drinkdetail3 );
+        td6.appendChild( drinkdescriptiontext );
+        tr.appendChild( tdbrewery );
+        tr.appendChild( td );
+        td.classList.add( "class1fav" ); //Add class to column
+        tr.appendChild( td2 );
+        td2.classList.add( "class2fav" );
+        tr.appendChild( td3 );
+        td3.classList.add( "class3fav" );
+        // tr.appendChild(td4);
+        // td4.classList.add("class4");
+        tr.appendChild( td5 );
+        td5.classList.add( "class5fav" );
+        tr.appendChild( td6 );
+        td6.classList.add( "class6fav" )
+      })
+    } )
+}
+
+//End of loading personal watchlist
+
 //Editing of beers
 //Establish what beers are available to edit
 function editbeers_prepare( input ) { //Click the link to show the beers
@@ -719,14 +854,20 @@ function personalfavorites() {
   loadpersonal();
 }
 
-function usersettings() {
+function watchlistsection() {
   moveTo( ".main", 4 );
+  loadwatchlist();
+}
+
+function usersettings() {
+  moveTo( ".main", 5 );
 }
 
 function contactus() {
-  moveTo( ".main", 5 );
+  moveTo( ".main", 6 );
 }
 // End of page moving
+
 //Loading
 function loading() {
   x = document.getElementById( "loading" )
