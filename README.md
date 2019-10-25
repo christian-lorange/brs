@@ -1,6 +1,5 @@
-# Firebase-Web-Login-TVAC
-In this series We will be covering the basics of Firebase Web App.
+## App in development by OrangeHouse LLC
 
+## Never Forget a Great Brew
 
-This is the working source code for the Firebase Web App Tutorial - Material Design Lite - Firebase Login
-available at https://youtu.be/Y3SDgIUZTak
+## Interest in getting a custom app developed? Contact info@orangehousellc.com
