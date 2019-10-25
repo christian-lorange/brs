@@ -244,7 +244,10 @@ function createdrink_submit() {
 
   setTimeout( function() {
     x.style.display = "none";
+    document.getElementById("drinkform").reset();
   }, 5000 ); //gif while loading
+
+
 
 }
 $( "#createdrink" ).on( "click", createdrink_submit ); /*No validation currently included*/
@@ -341,9 +344,9 @@ $( document ).ready( function() {
       td_logo.classList.add( "imageclass" );
 
       image.onclick = "#";
-      image.onclick = function() {
-        loadBeers( childSnapshot.child( "vn" ).val(), venue_name_input,  childSnapshot.child( "vi" ).val());
-      };
+      // image.onclick = function() {
+      //   loadBeers( childSnapshot.child( "vn" ).val(), venue_name_input,  childSnapshot.child( "vi" ).val());
+      // };
 
       var link = document.createElement( "div" );
       link.appendChild( document.createTextNode( childSnapshot.child( "vn" ).val() ) );
@@ -413,6 +416,8 @@ function loadBeers( input, venuename, url ) { //Click the link to show the beers
   var ref = firebase.database().ref( "Drinks" ); //Make connection to drinks table
   ref.once( 'value', function( snapshot ) { //Cycle through drinks
     snapshot.forEach( function( childSnapshot ) {
+      console.log(ven)
+      console.log(childSnapshot.child( "venue" ).val())
       if ( childSnapshot.child( "venue" ).val() == ven ) { //Only include drinks associated with venue
         //Create Columns and Rows
         var tr;
@@ -499,11 +504,12 @@ function loadBeers( input, venuename, url ) { //Click the link to show the beers
         drinkdetail2.appendChild( document.createTextNode( ( "ABV: " + childSnapshot.child( "da" ).val() ) ) );
         drinkdetail3.appendChild( document.createTextNode( ( "IBU: " + childSnapshot.child( "di" ).val() ) ) );
         drinkdescriptiontext.appendChild( document.createTextNode( childSnapshot.child( "dd" ).val() ) );
+        
         watchlist.appendChild( document.createTextNode("Add to Watch List"));
           watchlist.onclick = function() {              //add specific beer to watch list
           addtowatchlist( current_beer, current_venue );
           this.style.backgroundColor='green';
-          this.innerHTML="In Watch List"
+          this.innerHTML="In Watch List";
           };
 
           tdwatchlist.appendChild(watchlist);
@@ -531,7 +537,6 @@ function loadBeers( input, venuename, url ) { //Click the link to show the beers
           if (snapshot.hasChild("beer")){
             watchlist.style.backgroundColor = "green"
             watchlist.innerHTML="In Watch List"
-            watchlist.onclick = null;
           }
         })
 
@@ -846,6 +851,16 @@ function updatedrink_submit() {
     dcd,
     dd
   } ); //Send drink data to database
+
+  var x = document.getElementById( "beerupdated" );
+  x.style.display = "block";
+
+  setTimeout( function() {
+    x.style.display = "none";
+    document.getElementById("drinkupdate").reset();
+  }, 5000 ); //gif while loading
+
+
 }
 $( "#updatedrink" ).on( "click", updatedrink_submit ); /*No validation currently included*/
 //End of updating beer info

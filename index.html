@@ -132,7 +132,7 @@
 <input id="venue_phonenumber" placeholder="Phone Number"></input>
 <input id="venue_logourl" placeholder="URL of logo"></input>
 <button id="createvenue">Make Venue Live</button>
-<p style="background:green; display: none" id="userpending">Thank you for submitting your activation code. You can now start adding beers. You will need to click the "make venue live" button above for users to see your brewery and beer list.</p>
+<p id="userpending">Thank you for submitting your activation code. You can now start adding beers. You will need to click the "make venue live" button above for users to see your brewery and beer list.</p>
 <h2 id='venueemailresult'></h2>
 <h2 id='venuephoneresult'></h2>
 <h2 id='venuezipresult'></h2>
@@ -152,13 +152,15 @@
             <div class="panel-body">
                 <!-- Create Drink -->
 				<div id="drink" style="display: none">
+				<form id="drinkform">
 				<input id="drink_name" placeholder="Name"></input>
 				<input id="drink_style" placeholder="Style"></input>
 				<input id="drink_abv" placeholder="ABV"></input>
 				<input id="drink_ibu" placeholder="IBU"></input><br>
 				<textarea id="drink_description" placeholder="Description of Beer"></textarea><br>
 				<button id="createdrink">Add Beverage</button>
-				<p style="background:green; display: none" id="beeradded">Beer has been added</p>
+				</form>
+				<p id="beeradded">Beer has been added</p>
 				</div>
             </div>
         </div>
@@ -177,12 +179,15 @@
             		<option>Select a Beer to Edit</option>
             	</select>
                 <div id="drink_to_edit">
+                <form id="drinkupdate">
 				<input id="drink_name_edit" placeholder="Name"></input>
 				<input id="drink_style_edit" placeholder="Style"></input>
 				<input id="drink_abv_edit" placeholder="ABV"></input>
 				<input id="drink_ibu_edit" placeholder="IBU"></input><br>
 				<textarea id="drink_description_edit" placeholder="Description of Beer"></textarea><br>
 				<button id="updatedrink">Update Beverage</button>
+				</form>
+				<p id="beerupdated">Beer has been updated</p>
 				</div>
             </div>
         </div>
@@ -233,7 +238,7 @@
         <div id="collapse2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading2">
             <div class="panel-body">
                 <br>
-                <p>Submit your upgrade key. To receive an update key please contact XXXX</p>
+                <p>Submit your upgrade key. To receive an update key please contact info@brewmenustash.com</p>
                 <input id="upgradeaccount" placeholder="Upgrade Key"></input>
                 <button id="upgrade">Update to a Venue Accout</button>
                 <h3 id='upgraderesult' style="display: none">This is an invalid upgrade key or it has already been used</h3>
@@ -256,7 +261,24 @@
 <!-- Contact Us section -->
 <section class="major_section" id="contactsection">
   <h2>Contact Us</h2>
-  <script type="text/javascript" src="https://form.jotform.com/jsform/92904738286166"></script>
+  
+    <iframe
+      id="JotFormIFrame-92904738286166"
+      title="Brew Menu Stash Contact"
+      onload="window.parent.scrollTo(0,0)"
+      allowtransparency="true"
+      allowfullscreen="true"
+      allow="geolocation; microphone; camera"
+      src="https://form.jotform.com/92904738286166"
+      frameborder="0"
+      style="
+      min-width: 100%;
+      height:539px;
+      border:none;"
+      scrolling="no"
+    >
+    </iframe>
+   
 </section>
 
 </div>
