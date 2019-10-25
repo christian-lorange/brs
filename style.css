@@ -217,7 +217,7 @@ td.class2fav {
 }
 
 td.class3fav {
- width: 40vw !important;
+ width: 38vw !important;
     text-align: center;
     height: 35px;
     vertical-align: middle !important;
@@ -233,7 +233,7 @@ td.class3fav {
 }
 
 td.class4fav {
- width: 10vw !important;
+ width: 9vw !important;
     text-align: center;
     height: 35px;
     vertical-align: middle !important;
@@ -248,7 +248,7 @@ td.class4fav {
 }
 
 td.class5fav {
- width: 10vw !important;
+ width: 9vw !important;
     text-align: center;
     height: 35px;
     vertical-align: middle !important;
@@ -263,7 +263,7 @@ td.class5fav {
 }
 
 td.class6fav {
- width: 100vw !important;
+ width: 94vw !important;
     text-align: center;
     height: auto;
     vertical-align: middle !important;
@@ -373,9 +373,10 @@ h3 {
 }
 
 input#venuetable_input {
-    font-size: 2em;
+    font-size: 1.5em;
     border-radius: 20px;
     text-align: center;
+    max-width: 100vw;
 }
 
 table#venue_table {
@@ -448,7 +449,7 @@ input#update_password {
 }
 
 li {
-  font-size: 2.5em;
+  font-size: 2.1em;
   font-color: white;
   font-weight: bolder;
   padding-top: 7px;
