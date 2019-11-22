@@ -66,11 +66,11 @@ body {
 }
 
 .navbar-default .navbar-toggle {
-    border-color: #b2b12b;
+    border-color: #95D600;
 }
 
 .navbar-default .navbar-toggle .icon-bar {
-  background-color: #b2b12b !important;
+  background-color: #95D600 !important;
 }
 
 
@@ -84,7 +84,7 @@ width: 94vw !important;
     font-size: 2em;
     display: inline-block;
     border-style: none;
-    background-color: #b2b12b;
+    background-color: #95D600;
     border-bottom: 0;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -100,7 +100,7 @@ width: 94vw !important;
     font-size: 2em;
     display: inline-block;
     border-style: none;
-    background-color: #b2b12b;
+    background-color: #95D600;
     border-bottom: 0;
 }
 
@@ -117,7 +117,7 @@ td.class2 {
     border-top: 0;
     border-right: 0;
     border-bottom: 0;
-    background-color: #b2b12b;
+    background-color: #95D600;
 }
 
 td.class3 {
@@ -134,7 +134,7 @@ td.class3 {
     border-left: 0;
     border-right: 0;
     border-bottom: 0;
-    background-color: #b2b12b;
+    background-color: #95D600;
 }
 
 td.class4 {
@@ -151,7 +151,7 @@ td.class4 {
     border-left: 0;
     border-right: 0;
     border-bottom: 0;
-    background-color: #b2b12b;
+    background-color: #95D600;
 }
 
 td.class5 {
@@ -167,7 +167,7 @@ td.class5 {
     border-top: 0;
     border-left: 0;
     border-bottom: 0;
-    background-color: #b2b12b;
+    background-color: #95D600;
 }
 
 td.class6 {
@@ -180,7 +180,7 @@ td.class6 {
     display: inline-block;
     border-style: none;
     border-top: 0;
-    background-color: #b2b12b;
+    background-color: #95D600;
 }
 
 
@@ -394,7 +394,7 @@ table#venue_table a {
 
 td {
   width: 100vw;
-  background-color: #b2b12b;
+  background-color: #95D600;
 
 }
 
@@ -405,11 +405,11 @@ tr {
   border-color: #fff2c9;
   border-top-width:10px;
   border-bottom-width: 10px;
-  background-color: #b2b12b;
+  background-color: #95D600;
 }
 
 .panel-heading {
-  background-color: #b2b12b;
+  background-color: #95D600;
   font-weight: bolder;
 }
 
@@ -434,7 +434,7 @@ input#user, input#email, input#user_location, input#user_password, input#emailsi
 button#updatepassword, button#usersignout, button#createuser, button#usersignin, button#useremailreset, button#createdrink, button#updatedrink {
   width: 90vw;
   font-size: 1.5em;
-  background-color: #b2b12b;
+  background-color: #95D600;
   border-radius: 15px;
   font-weight: bolder;
   margin-top:7px;

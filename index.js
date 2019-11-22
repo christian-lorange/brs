@@ -329,37 +329,87 @@ $( "#createvenue" ).on( "click", validate_venue ); /*Run validation on click*/
 $( document ).ready( function() {
   var venue_name = [];
   loading();
-  var ref = firebase.database().ref( "Venues" );
-  ref.once( 'value', function( snapshot ) {
-    snapshot.forEach( function( childSnapshot ) {
-      var tr;
-      var td = document.createElement( 'td' );
-      tr = document.createElement( 'tr' );
-      td_logo = document.createElement ('td')
-      document.getElementById( 'venue_table' ).appendChild( tr );
+
+  // JSON load
+  var venuesUrl = 'https://databasetest-c5349.firebaseio.com/Venues/.json';    //Get url of venues JSON file
+  $.getJSON(venuesUrl, function(data){
+  var entry = data;
+
+  for (var x in entry) {
+
+   var tr;
+   var td = document.createElement( 'td' );
+   tr = document.createElement( 'tr' );
+   td_logo = document.createElement ('td')
+   document.getElementById( 'venue_table' ).appendChild( tr );
       
-      var image = document.createElement("img")
-      image.src = childSnapshot.child( "vi" ).val(); 
-      td_logo.appendChild( image );
-      td_logo.classList.add( "imageclass" );
+   var image = document.createElement("img")
+   image.src = entry[x].vi; 
+   td_logo.appendChild( image );
+   td_logo.classList.add( "imageclass" );
 
-      image.onclick = "#";
-      // image.onclick = function() {
-      //   loadBeers( childSnapshot.child( "vn" ).val(), venue_name_input,  childSnapshot.child( "vi" ).val());
-      // };
+   var venue_name_input = ( entry[x].vn );
+   
+   var linkstring1=entry[x].vn   //Temp variable for this loop
+   var linkstring2=venue_name_input  //Temp variable for this loop
+   var linkstring3=entry[x].vi  //Temp variable for this loop
 
-      var link = document.createElement( "div" );
-      link.appendChild( document.createTextNode( childSnapshot.child( "vn" ).val() ) );
-      link.onclick = "#";
-      var venue_name_input = ( childSnapshot.child( "vn" ).val() );
-      link.onclick = function() {
-        loadBeers( childSnapshot.child( "vn" ).val(), venue_name_input, childSnapshot.child( "vi" ).val() );
-      };
-      td.appendChild( link );
-      tr.appendChild( td_logo );
-      tr.appendChild( td );
-    } );
-  } );
+   image.onclick = function(linkstring1, linkstring2, linkstring3){   //implementing an Immediately-Invoked Function Expression so that variables are not lost between loops
+   return function () {loadBeers(linkstring1, linkstring2, linkstring3);
+   }
+   }(linkstring1,linkstring2,linkstring3)
+
+   var link = document.createElement( "div" );
+   link.appendChild( document.createTextNode(entry[x].vn ) );
+ 
+
+   // link.setAttribute('onclick','loadBeers('+entry[x].vn+', '+venue_name_input+', '+entry[x].vi+')');
+
+   link.onclick = function(linkstring1, linkstring2, linkstring3){   //implementing an Immediately-Invoked Function Expression so that variables are not lost between loops
+     return function () {loadBeers(linkstring1, linkstring2, linkstring3);
+     }
+   }(linkstring1,linkstring2,linkstring3)
+
+   td.appendChild( link );
+   tr.appendChild( td_logo );
+   tr.appendChild( td );
+  }  //end of looping through JSON
+
+  });
+
+
+//Legacy code that loaded venues from database (as opposed to from JSON)
+  // var ref = firebase.database().ref( "Venues" );
+  // ref.once( 'value', function( snapshot ) {
+  //   snapshot.forEach( function( childSnapshot ) {
+  //     var tr;
+  //     var td = document.createElement( 'td' );
+  //     tr = document.createElement( 'tr' );
+  //     td_logo = document.createElement ('td')
+  //     document.getElementById( 'venue_table' ).appendChild( tr );
+      
+  //     var image = document.createElement("img")
+  //     image.src = childSnapshot.child( "vi" ).val(); 
+  //     td_logo.appendChild( image );
+  //     td_logo.classList.add( "imageclass" );
+
+  //     image.onclick = "#";
+  //     // image.onclick = function() {
+  //     //   loadBeers( childSnapshot.child( "vn" ).val(), venue_name_input,  childSnapshot.child( "vi" ).val());
+  //     // };
+
+  //     var link = document.createElement( "div" );
+  //     link.appendChild( document.createTextNode( childSnapshot.child( "vn" ).val() ) );
+  //     link.onclick = "#";
+  //     var venue_name_input = ( childSnapshot.child( "vn" ).val() );
+  //     link.onclick = function() {
+  //       loadBeers( childSnapshot.child( "vn" ).val(), venue_name_input, childSnapshot.child( "vi" ).val() );
+  //     };
+  //     td.appendChild( link );
+  //     tr.appendChild( td_logo );
+  //     tr.appendChild( td );
+  //   } );
+  // } );
  
   //Check what level the user is
   setTimeout( function() {
@@ -405,6 +455,161 @@ $( document ).ready( function() {
 
 // Load Beers Associated with Venue
 function loadBeers( input, venuename, url ) { //Click the link to show the beers
+
+//   document.getElementById( "drink_table" ).innerHTML = ""; //Remove table content when you choose a new brewery
+//   document.getElementById( "venue_name_display" ).innerHTML = ""; //Remove venue name when you choose a new brewery
+//   var ven = input; //Make variable linking to selected venue
+//   var venuecurrent = venuename; //Make variable linking to selected venue name
+//   document.getElementById( "venue_name_display" ).innerHTML = venuecurrent; //Load Venue Name
+
+//   document.getElementById( "venueimage").src=url;
+
+//   // JSON load
+//   var venuesUrl = 'https://databasetest-c5349.firebaseio.com/Drinks/.json';    //Get url of venues JSON file
+//   $.getJSON(venuesUrl, function(data){
+//   var entry = data;
+
+//   for (var x in entry) {
+ 
+//       if ( entry[x].venue == ven ) { //Only include drinks associated with venue
+//         //Create Columns and Rows
+//         var tr;
+//         var td = document.createElement( 'td' );
+//         var td2 = document.createElement( 'td' );
+//         var td3 = document.createElement( 'td' );
+//         var td4 = document.createElement( 'td' );
+//         var td5 = document.createElement( 'td' );
+//         var td6 = document.createElement( 'td' );
+//         var tdwatchlist = document.createElement('td');   //add to watch list
+//         tr = document.createElement( 'tr' );
+//         //Start building tables
+//         document.getElementById( 'drink_table' ).appendChild( tr );
+//         var drinkdetail1 = document.createElement( "h4" );
+//         var drinkdetail2 = document.createElement( "p" );
+//         var drinkdetail3 = document.createElement( "p" );
+//         var drinkdescriptiontext = document.createElement( "p" );
+//         var watchlist = document.createElement("a");
+//         var firebaseRef = firebase.database().ref();
+//         var uid = firebase.auth().currentUser.uid;
+//         var current_beer = entry[x].did;
+//         var current_venue = entry[x].venue;
+
+//         //See if that particular beer has been rated by the current user
+//         firebaseRef.child( "Users" ).child( uid ).child( "rating" ).child( current_beer ).once( "value", snapshot => {
+//           if ( snapshot.child( "rating" ).val() == "1" ) { //If rated positive and color cell
+//             var like = document.createElement( "a" );
+//             like.appendChild( document.createTextNode( '\uD83D\uDC4D' ) );
+//             like.onclick = function() {
+//               likedrink( current_beer, current_venue );
+//               td4.setAttribute( "style", "background-color: green;" );
+//               td5.setAttribute( "style", "background-color: none;" );
+//             };
+//             td4.appendChild( like );
+//             td4.setAttribute( "style", "background-color:green" );
+//             like.setAttribute( "style", "font-size:1em" );
+//             var dislike = document.createElement( "a" );
+//             dislike.onclick = function() {
+//               dislikedrink( current_beer, current_venue );
+//               td5.setAttribute( "style", "background-color: red;" );
+//               td4.setAttribute( "style", "background-color: none;" );
+//             };
+//             dislike.appendChild( document.createTextNode( "\uD83D\uDC4E" ) );
+//             td5.appendChild( dislike );
+//           } else if ( snapshot.child( "rating" ).val() == "-1" ) { //If rated negative color cell
+//             var dislike = document.createElement( "a" );
+//             dislike.appendChild( document.createTextNode( "\uD83D\uDC4E" ) );
+//             dislike.onclick = function() {
+//               dislikedrink( current_beer, current_venue );
+//               td5.setAttribute( "style", "background-color: red;" );
+//               td4.setAttribute( "style", "background-color: none;" );
+//             };
+//             td5.appendChild( dislike );
+//             td5.setAttribute( "style", "background-color:red" );
+//             dislike.setAttribute( "style", "font-size:1em" );
+//             var like = document.createElement( "a" );
+//             like.onclick = function() {
+//               likedrink( current_beer, current_venue );
+//               td4.setAttribute( "style", "background-color: green;" );
+//               td5.setAttribute( "style", "background-color: none;" );
+//             };
+//             like.appendChild( document.createTextNode( '\uD83D\uDC4D' ) );
+//             td4.appendChild( like );
+//           } else {
+//             var like = document.createElement( "a" );
+//             like.onclick = function() {
+//               likedrink( current_beer, current_venue );
+//               td4.setAttribute( "style", "background-color: green;" );
+//               td5.setAttribute( "style", "background-color: none;" );
+//             };
+//             like.appendChild( document.createTextNode( '\uD83D\uDC4D' ) );
+//             td4.appendChild( like );
+//             var dislike = document.createElement( "a" );
+//             dislike.onclick = function() {
+//               dislikedrink( current_beer, current_venue );
+//               td5.setAttribute( "style", "background-color: red;" );
+//               td4.setAttribute( "style", "background-color: none;" );
+//             };
+//             dislike.appendChild( document.createTextNode( "\uD83D\uDC4E" ) );
+//             td5.appendChild( dislike );
+//           }
+//         } );
+
+        
+//         //Define what will be added to columns
+//         drinkdetail1.appendChild( document.createTextNode( entry[x].dn ) );
+//         drinkdetail2.appendChild( document.createTextNode( ( "ABV: " + entry[x].da ) ) );
+//         drinkdetail3.appendChild( document.createTextNode( ( "IBU: " + entry[x].di ) ) );
+//         drinkdescriptiontext.appendChild( document.createTextNode( entry[x].dd ) );
+        
+//         watchlist.appendChild( document.createTextNode("Add to Watch List"));
+//           watchlist.onclick = function() {              //add specific beer to watch list
+//           addtowatchlist( current_beer, current_venue );
+//           this.style.backgroundColor='green';
+//           this.innerHTML="In Watch List";
+//           };
+
+//           tdwatchlist.appendChild(watchlist);
+
+//         td.appendChild( drinkdetail1 ); //Add details to column
+//         td2.appendChild( drinkdetail2 );
+//         td3.appendChild( drinkdetail3 );
+//         td6.appendChild( drinkdescriptiontext );
+//         tr.appendChild( td );
+//         td.classList.add( "class1" ); //Add class to column      
+//         tr.appendChild( td2 );
+//         td2.classList.add( "class2" );
+//         tr.appendChild( td3 );
+//         td3.classList.add( "class3" );
+//         tr.appendChild( td4 );
+//         td4.classList.add( "class4" );
+//         tr.appendChild( td5 );
+//         td5.classList.add( "class5" );
+//         tr.appendChild( td6 );
+//         td6.classList.add( "class6" );
+//         tr.appendChild(tdwatchlist);
+//         tdwatchlist.classList.add("tdwatchlist");
+
+//         firebaseRef.child( "Users" ).child( uid ).child( "watch" ).child( current_beer ).once( "value", snapshot => {
+//           if (snapshot.hasChild("beer")){
+//             watchlist.style.backgroundColor = "green"
+//             watchlist.innerHTML="In Watch List"
+//           }
+//         })
+
+//         var x = document.getElementById( "venue_table" ); //hide venue table when show drinks
+//         x.style.display = "block";
+        
+//           [].forEach.call(document.querySelectorAll('.major_section'), function (el) {
+//           el.style.display = 'none';
+//           });
+          
+//           var x = document.getElementById("listbeers");
+//           x.style.display = "block";
+
+
+//       }
+//     }
+// })
   document.getElementById( "drink_table" ).innerHTML = ""; //Remove table content when you choose a new brewery
   document.getElementById( "venue_name_display" ).innerHTML = ""; //Remove venue name when you choose a new brewery
   var ven = input; //Make variable linking to selected venue
