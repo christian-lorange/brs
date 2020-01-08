@@ -53,16 +53,7 @@
   };
   // Initialize Firebase
   if(!firebase.apps.length){
-  firebase.initializeApp(firebaseConfig);
-
-  var notificationOpenedCallback = function(jsonData) {
-    console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
-  };
-
-  window.plugins.OneSignal
-    .startInit("6c2ec23d-7273-4da4-b347-6cfa5acd4f9a")
-    .handleNotificationOpened(notificationOpenedCallback)
-    .endInit();}
+  firebase.initializeApp(firebaseConfig);}
 
 
 
@@ -455,6 +446,16 @@ else {x.style.display = "none";}
 function onLoad() {
     document.addEventListener("deviceready", onDeviceReady, false);
     loading();
+
+
+    var notificationOpenedCallback = function(jsonData) {
+    console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
+  };
+
+  window.plugins.OneSignal
+    .startInit("6c2ec23d-7273-4da4-b347-6cfa5acd4f9a")
+    .handleNotificationOpened(notificationOpenedCallback)
+    .endInit();
 }
 
 
