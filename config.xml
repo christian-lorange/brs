@@ -16,6 +16,8 @@
         OrangeHouse LLC
     </author>
 
+
+
     <!--
         If you do not want any permissions to be added to your app, add the
         following tag to your config.xml; you will still have the INTERNET
@@ -66,7 +68,8 @@
 
 
 
-   
+       <!-- Push Notification -->
+    <gap:plugin name="onesignal-cordova-plugin" spec="2.4.5" source="npm" />
  
 
 
