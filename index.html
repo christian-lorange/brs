@@ -450,7 +450,7 @@ function onDeviceReady() {
 function onPause() {
     // Handle the pause event
     var date = new Date();   
-    window.localStorage.setItem("date", date.getTime());
+    localStorage.setItem("date", date.getTime());
 }
 
 function onResume() {
@@ -460,7 +460,7 @@ function onResume() {
     var seconds = (endDate.getTime() - startDate) / 1000;
 
     if (seconds>300){
-      loading();
+      location.reload()
     }
 }
 
