@@ -24,10 +24,15 @@
 
 
 
-<!-- The core Firebase JS SDK is always required and must be listed first -->
+<!-- The core Firebase JS SDK is always required and must be listed first --><!-- 
 <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.9.3/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/5.9.3/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.9.3/firebase-database.js"></script> -->
+
+
+<script src="firebase-app.js"></script>
+<script src="firebase-auth.js"></script>
+<script src="firebase-database.js"></script>
 
 
 <!-- TODO: Add SDKs for Firebase products that you want to use
@@ -426,13 +431,13 @@ else {x.style.display = "none";}
   <script src="index.js"></script>
 
   <script type="text/javascript">
-function loading() {
-  x = document.getElementById( "loading" )
-  x.style.display = "block";
-  setTimeout( function() {
-    x.style.display = "none";
-  }, 5000 ); //gif while loading
-}
+// function loading() {
+//   x = document.getElementById( "loading" )
+//   x.style.display = "block";
+//   setTimeout( function() {
+//     x.style.display = "none";
+//   }, 5000 ); //gif while loading
+// }
 
 function onLoad() {
     document.addEventListener("deviceready", onDeviceReady, false);
@@ -464,6 +469,48 @@ function onResume() {
     }
 }
 
+
+//Check if user is logged in
+
+  firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    // User is signed in.
+      var x = document.getElementById("notloggedin");     /*Hide login page when users log in*/
+      x.style.display = "none";
+
+      var y = document.getElementById("signout");         /*Show sign out when logging in*/
+      y.style.display = "block";
+
+
+  } else {
+    
+    // No user is signed in.
+    var x = document.getElementById("notloggedin");     /*Show login page when users logs out*/
+    x.style.display = "block";
+
+    var y = document.getElementById("signout");         /*Hide sign out when logging out*/
+    y.style.display = "none";
+
+    [].forEach.call(document.querySelectorAll('.major_section'), function (el) {
+  el.style.display = 'none';
+  });
+  var x = document.getElementById("account");
+  x.style.display = "block";
+                                 /*Scroll to log in page*/
+
+    var x = document.getElementById("venues_notsignedin");     /*Show error if user is not logged in*/
+    x.style.display = "block";
+
+    var x = document.getElementById("beers_notsignedin");     /*Show error if user is not logged in*/
+    x.style.display = "block";
+
+    var x = document.getElementById("accordionbeer");     /*Show error if user is not logged in*/
+    x.style.display = "none";
+
+    var x = document.getElementById("favorites_notsignedin");     /*Show error if user is not logged in*/
+    x.style.display = "block";
+  }
+});
 
 </script>
 
