@@ -19,7 +19,7 @@
  -->
   <!--Main Stylesheet -->
   <link rel="stylesheet" href="style.css" />
-  <script src="push.js"></script>
+
 
 <!-- 
    <link rel="stylesheet" href="onepage-scroll.css" /> -->
@@ -54,6 +54,7 @@
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
 
+  
 
   //Keep users logged in unless they explicitly logout
   firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
@@ -116,7 +117,7 @@
 
 </script>
 
-
+  <script src="push.js"></script>
 
 </head>
 <body onload="onLoad()">
