@@ -878,7 +878,7 @@ function loadpersonal() {
           this.parentElement.parentElement.style.display='none';
         };
         dislike.appendChild( document.createTextNode( "REMOVE" ) );
-        td5.setAttribute( "style", "background-color:red;width:20vw !important" );
+        td5.setAttribute( "style", "background-color:grey; border-color: black; border-radius:20px; border-width:3px; border-style:solid;width:20vw !important" );
         td5.appendChild( dislike );
         tdbrewery.appendChild( brewerydetail1 );
         td.appendChild( drinkdetail1 ); //Add details to column
@@ -963,7 +963,7 @@ function loadwatchlist() {
           td4.setAttribute( "style", "background-color: none;" )
         };
         dislike.appendChild( document.createTextNode( "REMOVE" ) );
-        td5.setAttribute( "style", "background-color:red;width:20vw !important" );
+        td5.setAttribute( "style", "background-color:grey; border-color: black; border-radius:20px; border-width:3px; border-style:solid;width:20vw !important" );
         td5.appendChild( dislike );
         tdbrewery.appendChild( brewerydetail1 );
         td.appendChild( drinkdetail1 ); //Add details to column

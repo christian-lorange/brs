@@ -22,12 +22,51 @@
 <!-- 
    <link rel="stylesheet" href="onepage-scroll.css" /> -->
 
+<script type="text/javascript">
+function loading() {
+  x = document.getElementById( "loading" )
+  x.style.display = "block";
+  setTimeout( function() {
+    x.style.display = "none";
+  }, 5000 ); //gif while loading
+}
+
+function onLoad() {
+    document.addEventListener("deviceready", onDeviceReady, false);
+    loading();
+}
 
 
+function onDeviceReady() {
+    document.addEventListener("pause", onPause, false);
+    document.addEventListener("resume", onResume, false);
+
+
+}
+
+function onPause() {
+    // Handle the pause event
+    var date = new Date();   
+    window.localStorage.setItem("date", date.getTime());
+}
+
+function onResume() {
+    // Handle the resume event
+    startDate=window.localStorage.getItem('date');
+    var endDate   = new Date();
+    var seconds = (endDate.getTime() - startDate) / 1000;
+
+    if (seconds>300){
+      loading();
+    }
+}
+
+
+</script>
 
 
 </head>
-<body>
+<body onload="onLoad()">
 
 <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
@@ -45,7 +84,7 @@
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <li><a href="#" onclick="breweries()" data-target=".navbar-collapse">Breweries</a></li>
-            <li><a href="#" onclick="beers()" data-target=".navbar-collapse">Beers</a></li>
+            <!--<li><a href="#" onclick="beers()" data-target=".navbar-collapse">Beers</a></li>-->
             <li><a href="#" onclick="personalfavorites()" data-target=".navbar-collapse">Personal Favorites</a></li>
             <li><a href="#" onclick="watchlistsection()" data-target=".navbar-collapse">Personal Watchlist</a></li>
             <li id="usernav"><a href="#" onclick="usersettings()" data-target=".navbar-collapse">User Settings</a></li>

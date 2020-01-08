@@ -39,7 +39,7 @@
 /*Navigation*/
 body {
   padding-top: 70px;
-  background-color: #fff2c9;
+  background-color: grey;
   text-align: center;
 }
 .navbar-default {
@@ -301,8 +301,8 @@ p {
   top: 0;
   left: 0;
   bottom: 0;
-  right: 0;/*
-  background: url('https://media.giphy.com/media/3oKIPcNVbTZ3e6OXMA/giphy.gif') no-repeat center center;*/
+  right: 0;
+  background: url('https://media.giphy.com/media/3oKIPcNVbTZ3e6OXMA/giphy.gif') no-repeat center center;
 }
 
 /* Transparent Overlay */
@@ -402,7 +402,7 @@ tr {
   width: 94vw;
   border: solid;
   border-width: 3px;
-  border-color: #fff2c9;
+  border-color: black;
   border-top-width:10px;
   border-bottom-width: 10px;
   background-color: #95D600;
