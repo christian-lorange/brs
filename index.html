@@ -20,6 +20,26 @@
   <!--Main Stylesheet -->
   <link rel="stylesheet" href="style.css" />
 
+  <script type="text/javascript">
+    document.addEventListener('deviceready', function () {
+  // Enable to debug issues.
+  // window.plugins.OneSignal.setLogLevel({logLevel: 4, visualLevel: 4});
+
+  console.log("test")
+  
+  var notificationOpenedCallback = function(jsonData) {
+    console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
+  };
+
+  window.plugins.OneSignal
+    .startInit("6c2ec23d-7273-4da4-b347-6cfa5acd4f9a")
+    .handleNotificationOpened(notificationOpenedCallback)
+    .endInit();
+}, false);
+
+
+
+  </script>
 
 <!-- 
    <link rel="stylesheet" href="onepage-scroll.css" /> -->
@@ -451,19 +471,6 @@ function onLoad() {
 function onDeviceReady() {
     document.addEventListener("pause", onPause, false);
     document.addEventListener("resume", onResume, false);
-
-    console.log("test")
-
-    var notificationOpenedCallback = function(jsonData) {
-    console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
-  };
-
-  window.plugins.OneSignal
-    .startInit("6c2ec23d-7273-4da4-b347-6cfa5acd4f9a")
-    .handleNotificationOpened(notificationOpenedCallback)
-    .endInit();
-
-
 }
 
 function onPause() {
